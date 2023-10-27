@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/heroescontentcreator/src/main/java/com/springpj/heroescontentcreator/HeroescontentcreatorApplication.java"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="1"/>
+    </listAttribute>
+    <mapAttribute key="org.eclipse.debug.core.environmentVariables">
+        <mapEntry key="DATABASE_DB" value="heroescontentcreatordb"/>
+        <mapEntry key="DATABASE_HOST" value="localhost"/>
+        <mapEntry key="DATABASE_PASSWORD" value="root"/>
+        <mapEntry key="DATABASE_PORT" value="5432"/>
+        <mapEntry key="DATABASE_PROTOCOL" value="postgresql"/>
+        <mapEntry key="DATABASE_USERNAME" value="postgres"/>
+        <mapEntry key="HIBERNATE_DDL_AUTO" value="none"/>
+        <mapEntry key="HIBERNATE_SHOW_SQL" value="false"/>
+        <mapEntry key="LIQUIBASE_ENABLE" value="true"/>
+        <mapEntry key="SERVICE_PORT" value="8081"/>
+    </mapAttribute>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
+    <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.springpj.heroescontentcreator.HeroescontentcreatorApplication"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="heroescontentcreator"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="heroescontentcreator"/>
+    <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
+</launchConfiguration>

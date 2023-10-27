@@ -1,0 +1,34 @@
+<mxfile host="Electron" modified="2023-10-19T10:03:13.052Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="sdzmVIANp0DOVTFg8Im1" version="22.0.2" type="device">
+  <diagram name="Page-1" id="g-WLUpt79GyFV0IrXqk3">
+    <mxGraphModel dx="1364" dy="843" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oqbDW7JfQdB0pxDO_GUQ-1" value="heroes-config-server" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oqbDW7JfQdB0pxDO_GUQ-2" value="heroes-content-creator" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oqbDW7JfQdB0pxDO_GUQ-3" value="heroes-authorization-server" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="360" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oqbDW7JfQdB0pxDO_GUQ-5" value="Heroes system" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oqbDW7JfQdB0pxDO_GUQ-7" value="Any request is redirected to the authorization server" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="470" y="385" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oqbDW7JfQdB0pxDO_GUQ-8" value="PSQL" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="640" y="150" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oqbDW7JfQdB0pxDO_GUQ-9" value="PSQL?" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="90" y="160" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oqbDW7JfQdB0pxDO_GUQ-10" value="PSQL/Neo4j?" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="290" y="440" width="80" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

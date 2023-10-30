@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.springpj.heroescontentcreator.errorhandler.exception.UserNotFoundByEmailException;
 import com.springpj.heroescontentcreator.errorhandler.exception.UserNotFoundByIdException;
 import com.springpj.heroescontentcreator.errorhandler.exception.UserNotFoundByUsernameException;
 import com.springpj.heroescontentcreator.mapper.UserMapper;
@@ -66,6 +67,15 @@ public class UserServiceImpl implements UserService {
 		Page<User> users = userRepository.findAll(pageRequest);
 		
 		return users.map(userMapper::toDto);
+	}
+
+
+
+	@Override
+	public UserDto findByEmail(String email) {
+		return userMapper.toDto(userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundByEmailException("Usename " + email + " not found- User service.")));
+    
 	}
 
 

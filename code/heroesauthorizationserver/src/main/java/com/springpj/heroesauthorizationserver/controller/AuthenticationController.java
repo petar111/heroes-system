@@ -17,6 +17,8 @@ import com.springpj.heroesauthorizationserver.model.user.UserPrincipal;
 import com.springpj.heroesauthorizationserver.service.AuthenticationService;
 import com.springpj.heroesauthorizationserver.token.jwt.JWTTokenProvider;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("auth")
@@ -31,7 +33,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<UserDto> login(@RequestBody LoginRequestDto loginRequestDto){
+    public ResponseEntity<UserDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto){
 
         try {
             UserDto result = authenticationService.login(loginRequestDto);
@@ -44,7 +46,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody RegisterRequestDto registerRequestDto){
+    public ResponseEntity<UserDto> register(@RequestBody @Valid RegisterRequestDto registerRequestDto){
 
             UserDto registeredUser = authenticationService.register(registerRequestDto);
             HttpHeaders headers = getJwtHeader(authenticationService.getUserPrincipal(registeredUser.getUsername()));

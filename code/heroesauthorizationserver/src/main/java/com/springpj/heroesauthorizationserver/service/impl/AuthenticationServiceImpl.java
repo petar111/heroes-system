@@ -1,5 +1,7 @@
 package com.springpj.heroesauthorizationserver.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +21,8 @@ import com.springpj.heroesauthorizationserver.service.AuthenticationService;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+	
+	Logger log = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
 
 	private final AuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
@@ -40,7 +44,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	public UserDto login(LoginRequestDto loginRequestDto) {
 		authenticate(loginRequestDto.getUsername(), loginRequestDto.getPassword());
 		
-		return new UserDto();
+		return null;
 	}
 
 	@Override
@@ -56,6 +60,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	
 		UserDto user = prepareUserForRegistration(registerRequestDto);
 
+		log.info("User dto: " + user);
 		return userClient.save(user);
 	}
 

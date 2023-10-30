@@ -11,6 +11,29 @@ import jakarta.validation.constraints.Size;
 
 public class UserDto {
 	
+	
+	
+	public UserDto() {
+		super();
+	}
+	public UserDto(Long id, @Size(max = 50, message = "Maximum username size is 50.") @NotNull String username,
+			@Size(max = 100, message = "Maximum email size is 100.") @NotNull String email,
+			@Size(max = 100, message = "Maximum email size is 100.") String backupEmail, String password,
+			AccountStatus accountStatus, boolean credentialsExpired, Date dateCreated, Date dateLastUpdated,
+			Long roleId) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.backupEmail = backupEmail;
+		this.password = password;
+		this.accountStatus = accountStatus;
+		this.credentialsExpired = credentialsExpired;
+		this.dateCreated = dateCreated;
+		this.dateLastUpdated = dateLastUpdated;
+		this.roleId = roleId;
+	}
+	
 	private Long id;
 	
 	@Size(max = 50, message = "Maximum username size is 50.")
@@ -95,6 +118,13 @@ public class UserDto {
 	}
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
+	}
+	@Override
+	public String toString() {
+		return "UserDto [id=" + id + ", username=" + username + ", email=" + email + ", backupEmail=" + backupEmail
+				+ ", password=" + password + ", accountStatus=" + accountStatus + ", credentialsExpired="
+				+ credentialsExpired + ", dateCreated=" + dateCreated + ", dateLastUpdated=" + dateLastUpdated
+				+ ", roleId=" + roleId + "]";
 	}
 	
 	

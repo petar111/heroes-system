@@ -15,4 +15,6 @@ public interface UserService {
 
 	Page<UserDto> findAllPage(PageRequestDto pageRequest);
 
+	UserDto findByEmail(String email);
+
 }

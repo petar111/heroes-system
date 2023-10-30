@@ -43,6 +43,11 @@ public class UserController {
 		return userService.findByUsername(username);
 	}
 	
+	@GetMapping("/email/{email}")
+	public UserDto findByEmail(@PathVariable String email) {
+		return userService.findByEmail(email);
+	}
+	
 	@PostMapping("save")
 	public UserDto save(@RequestBody UserDto user) {
 		

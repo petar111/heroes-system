@@ -45,8 +45,6 @@ public class UserController {
 	
 	@PostMapping("save")
 	public UserDto save(@RequestBody UserDto user) {
-		
-		log.info("User dto: " + user);
 		return userService.save(user);
 	}
 	

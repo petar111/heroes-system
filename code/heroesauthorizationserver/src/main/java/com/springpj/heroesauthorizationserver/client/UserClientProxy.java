@@ -20,5 +20,8 @@ public interface UserClientProxy{
 	
 	@PostMapping(value = "/user/save")
 	UserDto save(@RequestBody(required = true) UserDto user);
+
+	@GetMapping("/user/email/{email}")
+	UserDto findByEmail(@PathVariable String email);
 	
 }

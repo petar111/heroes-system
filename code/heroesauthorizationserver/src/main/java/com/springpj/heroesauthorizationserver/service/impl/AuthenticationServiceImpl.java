@@ -55,9 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
 	public UserDto register(RegisterRequestDto registerRequestDto) {
-
-//		userClient.findByUsername(registerRequestDto.getUsername());
-	
+		
 		UserDto user = prepareUserForRegistration(registerRequestDto);
 
 		log.info("User dto: " + user);

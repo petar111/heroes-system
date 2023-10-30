@@ -19,7 +19,7 @@ public class UserPrincipal implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
     	
-        return Collections.EMPTY_SET;
+        return Collections.emptySet();
     }
 
     @Override

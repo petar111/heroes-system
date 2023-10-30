@@ -1,7 +1,12 @@
 package com.springpj.heroesauthorizationserver.errorhandler.exception;
 
 public class AuthenticationFailedException extends ModelException {
-    public AuthenticationFailedException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AuthenticationFailedException(String message) {
         super(message);
     }
 }

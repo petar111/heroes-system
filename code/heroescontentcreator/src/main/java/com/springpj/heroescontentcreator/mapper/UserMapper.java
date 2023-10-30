@@ -1,6 +1,7 @@
 package com.springpj.heroescontentcreator.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.springpj.heroescontentcreator.model.dto.RegisterRequestDto;
 import com.springpj.heroescontentcreator.model.dto.UserDto;
@@ -15,6 +16,7 @@ public interface UserMapper {
 
     List<UserDto> toListDto(List<User> users);
 
+    @Mapping(source = "roleId", target = "role.id")
     User toEntity(UserDto userDto);
 
     User toEntity(RegisterRequestDto registerRequestDto);

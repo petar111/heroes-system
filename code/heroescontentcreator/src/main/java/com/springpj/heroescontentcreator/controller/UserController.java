@@ -1,9 +1,13 @@
 package com.springpj.heroescontentcreator.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +19,8 @@ import com.springpj.heroescontentcreator.service.UserService;
 @RestController
 @RequestMapping("user")
 public class UserController {
+	
+	Logger log = LoggerFactory.getLogger(UserController.class);
 	
 	
 	private final UserService userService;
@@ -30,6 +36,18 @@ public class UserController {
 	@GetMapping("{id}")
 	public UserDto findById(@PathVariable Long id) {
 		return userService.findById(id);
+	}
+	
+	@GetMapping("/@/{username}")
+	public UserDto findByUsername(@PathVariable String username) {
+		return userService.findByUsername(username);
+	}
+	
+	@PostMapping("save")
+	public UserDto save(@RequestBody UserDto user) {
+		
+		log.info("User dto: " + user);
+		return userService.save(user);
 	}
 	
 	@GetMapping("all")

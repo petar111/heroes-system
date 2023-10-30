@@ -2,7 +2,6 @@ package com.springpj.heroescontentcreator.model.dto;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springpj.heroescontentcreator.model.user.AccountStatus;
 import com.springpj.heroescontentcreator.model.validation.ValidEmail;
 import com.springpj.heroescontentcreator.model.validation.ValidPassword;
@@ -34,6 +33,10 @@ public class UserDto {
 	
 	private Date dateCreated;
 	private Date dateLastUpdated;
+	
+	private Long roleId;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -88,6 +91,21 @@ public class UserDto {
 	public void setCredentialsExpired(boolean credentialsExpired) {
 		this.credentialsExpired = credentialsExpired;
 	}
+	public Long getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+	@Override
+	public String toString() {
+		return "UserDto [id=" + id + ", username=" + username + ", email=" + email + ", backupEmail=" + backupEmail
+				+ ", password=" + password + ", accountStatus=" + accountStatus + ", credentialsExpired="
+				+ credentialsExpired + ", dateCreated=" + dateCreated + ", dateLastUpdated=" + dateLastUpdated
+				+ ", roleId=" + roleId + "]";
+	}
+	
+	
 	
 
 }

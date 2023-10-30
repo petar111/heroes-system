@@ -1,5 +1,6 @@
 package com.springpj.heroescontentcreator.mapper;
 
+import com.springpj.heroescontentcreator.model.authorization.Role;
 import com.springpj.heroescontentcreator.model.dto.RegisterRequestDto;
 import com.springpj.heroescontentcreator.model.dto.UserDto;
 import com.springpj.heroescontentcreator.model.user.User;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-10-27T13:26:27+0200",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 18.0.2-ea (Private Build)"
+    date = "2023-10-30T09:24:15+0100",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 18.0.2 (Eclipse Adoptium)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -59,6 +60,7 @@ public class UserMapperImpl implements UserMapper {
 
         User user = new User();
 
+        user.setRole( userDtoToRole( userDto ) );
         user.setId( userDto.getId() );
         user.setUsername( userDto.getUsername() );
         user.setEmail( userDto.getEmail() );
@@ -86,5 +88,17 @@ public class UserMapperImpl implements UserMapper {
         user.setPassword( registerRequestDto.getPassword() );
 
         return user;
+    }
+
+    protected Role userDtoToRole(UserDto userDto) {
+        if ( userDto == null ) {
+            return null;
+        }
+
+        Role role = new Role();
+
+        role.setId( userDto.getRoleId() );
+
+        return role;
     }
 }

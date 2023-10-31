@@ -18,21 +18,20 @@ import com.springpj.heroesauthorizationserver.model.user.AccountStatus;
 import com.springpj.heroesauthorizationserver.model.user.UserPrincipal;
 import com.springpj.heroesauthorizationserver.service.AuthenticationService;
 
-
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-	
+
 	Logger log = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
 
 	private final AuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
 	private final UserMapper userMapper;
-	
+
 	private final UserClientProxy userClient;
 	private final RoleClientProxy roleClient;
 
-	public AuthenticationServiceImpl(AuthenticationManager authenticationManager,
-			PasswordEncoder passwordEncoder, UserMapper userMapper, UserClientProxy userClient, RoleClientProxy roleClient) {
+	public AuthenticationServiceImpl(AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder,
+			UserMapper userMapper, UserClientProxy userClient, RoleClientProxy roleClient) {
 		this.authenticationManager = authenticationManager;
 		this.passwordEncoder = passwordEncoder;
 		this.userMapper = userMapper;
@@ -43,22 +42,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Override
 	public UserDto login(LoginRequestDto loginRequestDto) {
 		authenticate(loginRequestDto.getUsername(), loginRequestDto.getPassword());
-		
-		return null;
+
+		return userClient.findByUsername(loginRequestDto.getUsername());
 	}
 
 	@Override
 	public UserPrincipal getUserPrincipal(String username) {
-		return new UserPrincipal(
-				userClient.findByUsername(username));
+		return new UserPrincipal(userClient.findByUsername(username));
 	}
 
 	@Override
 	public UserDto register(RegisterRequestDto registerRequestDto) {
-		
-		UserDto user = prepareUserForRegistration(registerRequestDto);
 
-		log.info("User dto: " + user);
+		UserDto user = prepareUserForRegistration(registerRequestDto);
 		return userClient.save(user);
 	}
 
@@ -68,11 +64,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		result.setPassword(passwordEncoder.encode(result.getPassword()));
 		result.setAccountStatus(AccountStatus.ACTIVE);
 		result.setCredentialsExpired(false);
-		
-		RoleDto role = roleClient.findByName(registerRequestDto.getRoleName());
-		
-		result.setRoleId(role.getId());;
 
+		RoleDto role = roleClient.findByName(registerRequestDto.getRoleName());
+
+		result.setRoleId(role.getId());
 		return result;
 	}
 

@@ -16,10 +16,10 @@ import com.springpj.heroesauthorizationserver.dto.UserDto;
 public interface UserClientProxy{
 
 	@GetMapping("/user/@/{username}")
-	UserDto findByUsername(@PathVariable("username") String username);
+	UserDto findByUsername(@PathVariable String username);
 	
-	@PostMapping(value = "/user/save")
-	UserDto save(@RequestBody(required = true) UserDto user);
+	@PostMapping("/user/save")
+	UserDto save(@RequestBody UserDto user);
 
 	@GetMapping("/user/email/{email}")
 	UserDto findByEmail(@PathVariable String email);

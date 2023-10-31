@@ -1,10 +1,13 @@
 package com.springpj.heroescontentcreator.controller;
 
+import java.util.Set;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springpj.heroescontentcreator.model.dto.AuthorityDto;
 import com.springpj.heroescontentcreator.model.dto.role.RoleDto;
 import com.springpj.heroescontentcreator.service.RoleService;
 
@@ -21,6 +24,11 @@ public class RoleController {
 	@GetMapping("{id}")
 	public RoleDto findById(@PathVariable Long id) {
 		return roleService.findById(id);
+	}
+	
+	@GetMapping("{id}/authorities")
+	public Set<AuthorityDto> findAllAuthoritiesByRoleId(@PathVariable Long id) {
+		return roleService.findAllAuthoritiesByRoleId(id);
 	}
 	
 	@GetMapping("/name/{name}")

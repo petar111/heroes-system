@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto save(UserDto userDto) {
 		User user = userMapper.toEntity(userDto);
 
+		//TODO: improve validation
 		if (user.getId() == null) {
 			userRepository.findByUsername(user.getUsername()).ifPresent((u) -> {
 				throw new UserAlreadyExistsException("User with username " + user.getUsername() + " already exists.");

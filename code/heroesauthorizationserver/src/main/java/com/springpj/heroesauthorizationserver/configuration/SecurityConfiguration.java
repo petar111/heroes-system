@@ -19,10 +19,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import com.springpj.heroesauthorizationserver.token.jwt.JwtAccessDeniedHandler;
-import com.springpj.heroesauthorizationserver.token.jwt.JwtAuthenticationEntryPoint;
 import com.springpj.heroesauthorizationserver.token.jwt.JwtAuthorizationFilter;
 
 @Configuration
@@ -33,29 +30,19 @@ public class SecurityConfiguration {
 
     private final UserDetailsService userDetailsService;
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    
-    private final RequestMappingHandlerMapping requestMapping;
     
     public SecurityConfiguration(
             @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
-            JwtAuthorizationFilter jwtAuthorizationFilter,
-            JwtAccessDeniedHandler jwtAccessDeniedHandler,
-            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-            @Qualifier("requestMappingHandlerMapping") RequestMappingHandlerMapping requestMapping
+            JwtAuthorizationFilter jwtAuthorizationFilter
             ) {
     	
         this.userDetailsService = userDetailsService;
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
-        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-        this.requestMapping = requestMapping;
     }
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    	
+    	log.debug(SecurityFilterChain.class + " entry point.");
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(

@@ -36,6 +36,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+    	log.debug("JWTTokenProvider entry point.");
         if (request.getMethod().equalsIgnoreCase(SecurityConstants.JWT_OPTIONS)) {
             response.setStatus(HttpStatus.OK.value());
         } else {

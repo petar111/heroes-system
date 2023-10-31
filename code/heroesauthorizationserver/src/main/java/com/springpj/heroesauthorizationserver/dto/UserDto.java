@@ -3,9 +3,9 @@ package com.springpj.heroesauthorizationserver.dto;
 import java.util.Date;
 
 import com.springpj.heroesauthorizationserver.model.user.AccountStatus;
-import com.springpj.heroesauthorizationserver.validation.ValidEmail;
 import com.springpj.heroesauthorizationserver.validation.ValidPassword;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -18,12 +18,12 @@ public class UserDto {
 	private String username;
 	
 	@Size(max = 100, message = "Maximum email size is 100.")
-	@ValidEmail
 	@NotNull
+	@Email
 	private String email;
 	
 	@Size(max = 100, message = "Maximum email size is 100.")
-	@ValidEmail
+	@Email
 	private String backupEmail;
 
 	@ValidPassword

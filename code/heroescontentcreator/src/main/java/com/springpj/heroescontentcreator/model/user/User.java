@@ -6,7 +6,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.springpj.heroescontentcreator.model.authorization.Role;
-import com.springpj.heroescontentcreator.model.validation.ValidEmail;
 import com.springpj.heroescontentcreator.model.validation.ValidPassword;
 
 import jakarta.persistence.Column;
@@ -18,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -37,12 +37,12 @@ public class User {
 	
 	@Size(max = 100, message = "Maximum email size is 100.")
 	@Column(name = "EMAIL", nullable = false, unique = true)
-	@ValidEmail
+	@Email
 	private String email;
 	
 	@Size(max = 100, message = "Maximum email size is 100.")
 	@Column(name = "BACKUP_EMAIL", nullable = true, unique = true)
-	@ValidEmail
+	@Email
 	private String backupEmail;
 
 	@Column(name = "PASSWORD", nullable = false)

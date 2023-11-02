@@ -1,4 +1,4 @@
-package com.springpj.heroesauthorizationserver.token.jwt;
+package com.springpj.heroesapigateway.security.jwt;
 
 
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -13,7 +13,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springpj.heroesauthorizationserver.errorhandler.exception.ErrorResponse;
+import com.springpj.heroesapigateway.errorhandler.ErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

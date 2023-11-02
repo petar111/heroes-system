@@ -12,7 +12,6 @@ import com.springpj.heroescontentcreator.authorization.context.AuthorizationCont
 import com.springpj.heroescontentcreator.repository.AccessTypeRepository;
 import com.springpj.heroescontentcreator.repository.AuthorityRepository;
 import com.springpj.heroescontentcreator.repository.ResourceRepository;
-import com.springpj.heroescontentcreator.repository.RoleRepository;
 
 @Component
 public class GlobalApplicationInitializationListener {

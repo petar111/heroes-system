@@ -44,6 +44,20 @@ public class AuthenticationController {
         }
 
     }
+    
+    @PostMapping("authenticate")
+    public ResponseEntity<UserDto> authenticate(){
+
+//        try {
+//            UserDto result = authenticationService.login(loginRequestDto);
+//            HttpHeaders headers = getJwtHeader(authenticationService.getUserPrincipal(loginRequestDto.getUsername()));
+//            return new ResponseEntity<>(result, headers, HttpStatus.OK);
+//        }catch (Exception ex){
+//            throw new AuthenticationFailedException("Login failed. Check your username and/or password.");
+//        }
+    	throw new UnsupportedOperationException();
+
+    }
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody @Valid RegisterRequestDto registerRequestDto){

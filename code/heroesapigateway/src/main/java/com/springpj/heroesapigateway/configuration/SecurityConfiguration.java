@@ -44,7 +44,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     	log.debug(SecurityFilterChain.class + " entry point.");
         http.csrf(AbstractHttpConfigurer::disable)
-        		.authorizeHttpRequests(r -> r.anyRequest().authenticated())
+        		.authorizeHttpRequests(r -> r
+        				.requestMatchers("/heroes-authorization-server/auth/**")
+        					.permitAll()
+        				.anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
                 		jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

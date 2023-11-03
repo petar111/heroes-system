@@ -41,7 +41,7 @@ public class SecurityConfiguration {
     	log.debug(SecurityWebFilterChain.class + " entry point.");
         http.csrf(csrf -> csrf.disable())
         		.authorizeExchange(e -> e
-        				.pathMatchers("/heroes-authorization-server/auth/**").authenticated()
+        				.pathMatchers("/heroes-authorization-server/auth/**").permitAll()
         				.anyExchange().authenticated())
                 .authenticationManager(authenticationManager())
                 .addFilterBefore(

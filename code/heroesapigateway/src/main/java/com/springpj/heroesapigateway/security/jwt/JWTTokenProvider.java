@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -21,8 +21,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.springpj.heroesapigateway.model.user.UserPrincipal;
 import com.springpj.heroesapigateway.security.constants.SecurityConstants;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class JWTTokenProvider {
@@ -49,11 +47,11 @@ public class JWTTokenProvider {
 
     public Authentication getAuthentication(String username,
                                             List<GrantedAuthority> authorities,
-                                            HttpServletRequest request) {
+                                            ServerHttpRequest request) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                 = new UsernamePasswordAuthenticationToken(username, null, authorities);
-        usernamePasswordAuthenticationToken.setDetails(
-                new WebAuthenticationDetailsSource().buildDetails(request));
+//        usernamePasswordAuthenticationToken.setDetails(
+//                new WebAuthenticationDetailsSource().buildDetails(request));
         return usernamePasswordAuthenticationToken;
     }
 

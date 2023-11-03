@@ -6,7 +6,6 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 
 @Configuration
 public class RouteConfiguration {
@@ -18,17 +17,8 @@ public class RouteConfiguration {
 
 		return builder
 				.routes()
-				.route(r -> r.path("/**")
-						.filters(f -> f.filter(
-								(exchange, chain) -> {
-									ServerHttpRequest request = exchange.getRequest();
-									
-									log.info("Original URI: {}", request.getURI());
-									
-									return chain.filter(exchange);
-								}
-								))
-						.uri("lb://heroes-authorization-server/authenticate"))
+				.route("heroes-content-creator", r -> r.path("/heroes-content-creator/**")
+						.uri("lb://heroes-content-creator"))
 //				.route(r -> r.path("/get")
 //						.filters(f -> f.addRequestHeader("MyRequestHEADER", "MyRequestHeaderVALUE")
 //								.addRequestParameter("addedParam", "paramValue")

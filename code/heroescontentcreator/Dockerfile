@@ -1,11 +1,9 @@
-FROM eclipse-temurin:18-jdk-focal
+FROM openjdk:18-jdk-alpine3.14
  
 WORKDIR /app
  
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+COPY . .
+
 RUN ./mvnw dependency:go-offline
- 
-COPY src ./src
  
 CMD ["./mvnw", "spring-boot:run"]

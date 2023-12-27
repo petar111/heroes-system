@@ -1,12 +1,9 @@
-FROM eclipse-temurin:18-jdk-focal
+FROM openjdk:18-jdk-alpine3.14
 
 WORKDIR /app
 
-COPY .gradle .gradle/
-COPY gradlew build.gradle ./
+COPY . .
 
-RUN ./gradlew dependency:go-offline
-
-COPY src ./src
+RUN ./gradlew dependencies
 
 CMD ["./gradlew", "bootRun"]

@@ -1,5 +1,6 @@
 package com.springpj.heroesapigateway.model.user;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.springpj.heroesapigateway.dto.UserDto;
 
 public class UserPrincipal implements UserDetails {
+    @Serial
     private static final long serialVersionUID = 4889114430550460076L;
 	private final UserDto user;
 

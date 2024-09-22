@@ -1,20 +1,14 @@
 package com.springpj.heroesapigateway.security.constants;
 
-import org.springframework.http.HttpMethod;
-
 public interface SecurityConstants {
-	public static final String[] AUTH_WHITELIST = {"/","/login","/register","/auth/register","/auth/login","/home/**"};
-    public static final String JWT_SECRET_KEY = "7817586165658315776978987486471-391568161597189390820941=02592498195";
-    public static final long EXPIRATION_TIME = 432_000_000;
-    public static final String JWT_ISSUER = "SIUX";
-    public static final String JWT_VERIFIER_ERROR = "Token can not be verified";
-    public static final String JWT_AUTHORITIES = "authorities";
-    public static final String JWT_AUDIENCE = "Audience FIXME";
-    public static final String JWT_TOKEN_PREFIX = "Bearer ";
-    public static final HttpMethod JWT_OPTIONS = HttpMethod.OPTIONS;
-    public static final String FORBIDDEN_MESSAGE = "You need to login to access this content.";
-    public static final String ACCESS_DENIED_MESSAGE = "You do not have permission to access this content.";
+    String JWT_SECRET_KEY = "7817586165658315776978987486471-391568161597189390820941=02592498195";
+    long EXPIRATION_TIME = 432_000_000;
+    String JWT_ISSUER = "SIUX";
+    String JWT_VERIFIER_ERROR = "Token can not be verified";
+    String JWT_AUTHORITIES = "authorities";
+    String JWT_AUDIENCE = "Audience FIXME";
+    String JWT_TOKEN_PREFIX = "Bearer ";
     
-    public static final String JWT_SUBJECT_DELIMITER = ":";
+    String JWT_SUBJECT_DELIMITER = ":";
 
 }

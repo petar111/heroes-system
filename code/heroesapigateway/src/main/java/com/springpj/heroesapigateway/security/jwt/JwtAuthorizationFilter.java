@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
@@ -21,6 +20,8 @@ import org.springframework.web.server.WebFilterChain;
 import com.springpj.heroesapigateway.security.constants.SecurityConstants;
 
 import reactor.core.publisher.Mono;
+
+import static com.springpj.heroesapigateway.security.constants.SecurityConstants.JWT_SUBJECT_DELIMITER;
 
 
 @Component
@@ -39,7 +40,6 @@ public class JwtAuthorizationFilter implements WebFilter {
 
 		log.info("JwtAuthorizationFilter - START");
 		ServerHttpRequest request = exchange.getRequest();
-		ServerHttpResponse response = exchange.getResponse();
 
         Optional<String> authorizationHeader = request.getHeaders().getOrEmpty(HttpHeaders.AUTHORIZATION)
                 .stream().filter(a -> a.startsWith(SecurityConstants.JWT_TOKEN_PREFIX))
@@ -66,6 +66,6 @@ public class JwtAuthorizationFilter implements WebFilter {
 
     private String extractUsernameFromToken(String token){
         return jwtTokenProvider.getSubject(token)
-                                    .split(":")[0];
+                                    .split(JWT_SUBJECT_DELIMITER)[0];
     }
 }

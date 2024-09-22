@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.springpj.heroesauthorizationserver.dto.RoleDto;
 
-@FeignClient(name = ClientConstants.HEROES_CONTENT_CREATOR_APP_NAME, contextId = "role-client-proxy")
+@FeignClient(name = ClientConstants.HEROES_USER_SERVICE_APPLICATION_NAME, contextId = "role-client-proxy")
 public interface RoleClientProxy {
 	
 	@GetMapping("/role/name/{name}")

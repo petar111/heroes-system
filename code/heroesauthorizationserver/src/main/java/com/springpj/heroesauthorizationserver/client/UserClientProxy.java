@@ -10,7 +10,7 @@ import com.springpj.heroesauthorizationserver.configuration.FeignConfiguration;
 import com.springpj.heroesauthorizationserver.dto.UserDto;
 
 
-@FeignClient(name = ClientConstants.HEROES_CONTENT_CREATOR_APP_NAME, 
+@FeignClient(name = ClientConstants.HEROES_USER_SERVICE_APPLICATION_NAME,
 				contextId = "user-client-proxy", 
 				configuration = FeignConfiguration.class)
 public interface UserClientProxy{

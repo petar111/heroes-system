@@ -35,6 +35,30 @@ services:
       - naming-server
       - db
 
+  heroes-user-service:
+    build:
+      context: ../code/heroesuserservice
+    ports:
+      - 8050:8050
+    environment:
+      DATABASE_DB: heroesuserservicedb
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      DATABASE_PROTOCOL: postgresql
+      SERVICE_PORT: 8050
+      HIBERNATE_DDL_AUTO: none
+      LIQUIBASE_ENABLE: true
+      HIBERNATE_SHOW_SQL: false
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+    networks:
+      - heroes-system-network
+    depends_on:
+      - naming-server
+      - db
+
   heroes-authorization-server:
     build:
       context: ../code/heroesauthorizationserver
@@ -80,11 +104,12 @@ services:
     secrets:
       - db-password
     volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
       - db-data:/var/lib/postgresql/data
     networks:
       - heroes-system-network
     environment:
-      POSTGRES_DB: heroesoriginservicedb
+      POSTGRES_MULTIPLE_DATABASES: heroesoriginservicedb,heroesuserservicedb
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
     expose:
       - "5432"

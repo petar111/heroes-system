@@ -1,12 +1,12 @@
-package com.springpj.heroescontentcreator.model.user;
+package com.springpj.heroesoriginservice.model.user;
 
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.springpj.heroescontentcreator.model.authorization.Role;
-import com.springpj.heroescontentcreator.model.validation.ValidPassword;
+import com.springpj.heroesoriginservice.model.authorization.Role;
+import com.springpj.heroesoriginservice.model.validation.ValidPassword;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

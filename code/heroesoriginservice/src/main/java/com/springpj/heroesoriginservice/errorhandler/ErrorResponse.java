@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.errorhandler;
+package com.springpj.heroesoriginservice.errorhandler;
 
 import org.springframework.http.HttpStatus;
 

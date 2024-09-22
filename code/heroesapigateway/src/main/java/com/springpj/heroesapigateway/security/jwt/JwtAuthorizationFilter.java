@@ -36,7 +36,7 @@ public class JwtAuthorizationFilter implements WebFilter {
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        
+
 		log.info("JwtAuthorizationFilter - START");
 		ServerHttpRequest request = exchange.getRequest();
 		ServerHttpResponse response = exchange.getResponse();

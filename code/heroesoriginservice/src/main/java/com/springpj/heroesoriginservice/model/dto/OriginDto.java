@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.model.dto;
+package com.springpj.heroesoriginservice.model.dto;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.model.dto.paging;
+package com.springpj.heroesoriginservice.model.dto.paging;
 
 public class PageRequestBuilder {
 

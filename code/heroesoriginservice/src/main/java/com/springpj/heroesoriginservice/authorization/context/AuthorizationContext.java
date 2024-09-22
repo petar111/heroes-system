@@ -1,14 +1,14 @@
-package com.springpj.heroescontentcreator.authorization.context;
+package com.springpj.heroesoriginservice.authorization.context;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.springpj.heroescontentcreator.errorhandler.exception.AccessTypeNotFoundByNameException;
-import com.springpj.heroescontentcreator.errorhandler.exception.ResourceNotFoundByNameException;
-import com.springpj.heroescontentcreator.model.authorization.AccessType;
-import com.springpj.heroescontentcreator.model.authorization.Authority;
-import com.springpj.heroescontentcreator.model.authorization.Resource;
+import com.springpj.heroesoriginservice.errorhandler.exception.AccessTypeNotFoundByNameException;
+import com.springpj.heroesoriginservice.errorhandler.exception.ResourceNotFoundByNameException;
+import com.springpj.heroesoriginservice.model.authorization.AccessType;
+import com.springpj.heroesoriginservice.model.authorization.Authority;
+import com.springpj.heroesoriginservice.model.authorization.Resource;
 
 public enum AuthorizationContext {
 	INSTANCE;

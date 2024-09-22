@@ -1,19 +1,19 @@
-package com.springpj.heroescontentcreator.service.impl;
+package com.springpj.heroesoriginservice.service.impl;
 
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.springpj.heroescontentcreator.errorhandler.exception.RoleNotFoundByIdException;
-import com.springpj.heroescontentcreator.errorhandler.exception.RoleNotFoundByNameException;
-import com.springpj.heroescontentcreator.mapper.AuthorityMapper;
-import com.springpj.heroescontentcreator.mapper.RoleMapper;
-import com.springpj.heroescontentcreator.model.authorization.Authority;
-import com.springpj.heroescontentcreator.model.authorization.Role;
-import com.springpj.heroescontentcreator.model.dto.AuthorityDto;
-import com.springpj.heroescontentcreator.model.dto.role.RoleDto;
-import com.springpj.heroescontentcreator.repository.RoleRepository;
-import com.springpj.heroescontentcreator.service.RoleService;
+import com.springpj.heroesoriginservice.errorhandler.exception.RoleNotFoundByIdException;
+import com.springpj.heroesoriginservice.errorhandler.exception.RoleNotFoundByNameException;
+import com.springpj.heroesoriginservice.mapper.AuthorityMapper;
+import com.springpj.heroesoriginservice.mapper.RoleMapper;
+import com.springpj.heroesoriginservice.model.authorization.Authority;
+import com.springpj.heroesoriginservice.model.authorization.Role;
+import com.springpj.heroesoriginservice.model.dto.AuthorityDto;
+import com.springpj.heroesoriginservice.model.dto.role.RoleDto;
+import com.springpj.heroesoriginservice.repository.RoleRepository;
+import com.springpj.heroesoriginservice.service.RoleService;
 
 
 @Service

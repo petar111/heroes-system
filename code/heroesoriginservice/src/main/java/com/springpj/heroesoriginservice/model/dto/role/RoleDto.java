@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.model.dto.role;
+package com.springpj.heroesoriginservice.model.dto.role;
 
 public class RoleDto {
 

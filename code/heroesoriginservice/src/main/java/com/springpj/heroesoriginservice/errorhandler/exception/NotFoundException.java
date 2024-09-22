@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.errorhandler.exception;
+package com.springpj.heroesoriginservice.errorhandler.exception;
 
 public class NotFoundException extends ModelException {
 

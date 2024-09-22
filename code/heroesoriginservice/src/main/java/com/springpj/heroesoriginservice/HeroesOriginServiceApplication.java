@@ -1,13 +1,13 @@
-package com.springpj.heroescontentcreator;
+package com.springpj.heroesoriginservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HeroescontentcreatorApplication {
+public class HeroesOriginServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HeroescontentcreatorApplication.class, args);
+		SpringApplication.run(HeroesOriginServiceApplication.class, args);
 	}
 
 }

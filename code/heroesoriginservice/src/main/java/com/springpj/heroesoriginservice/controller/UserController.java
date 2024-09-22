@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.controller;
+package com.springpj.heroesoriginservice.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springpj.heroescontentcreator.model.dto.UserDto;
-import com.springpj.heroescontentcreator.model.dto.paging.PageRequestDto;
-import com.springpj.heroescontentcreator.service.UserService;
+import com.springpj.heroesoriginservice.model.dto.UserDto;
+import com.springpj.heroesoriginservice.model.dto.paging.PageRequestDto;
+import com.springpj.heroesoriginservice.service.UserService;
 
 @RestController
 @RequestMapping("user")

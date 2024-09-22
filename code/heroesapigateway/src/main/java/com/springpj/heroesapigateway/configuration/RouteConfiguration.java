@@ -17,10 +17,10 @@ public class RouteConfiguration {
 
 		return builder
 				.routes()
-				// .route("heroes-authorization-server", r -> r.path("/heroes-authorization-server/**")
-				// 		.uri("lb://heroes-authorization-server"))
-				// .route("heroes-content-creator", r -> r.path("/heroes-content-creator/**")
-				// 		.uri("lb://heroes-content-creator"))
+//				 .route("heroes-authorization-server", r -> r.path("/heroes-authorization-server/**")
+//				 		.uri("lb://heroes-authorization-server"))
+//				 .route("heroes-content-creator", r -> r.path("/heroes-content-creator/**")
+//				 		.uri("lb://heroes-content-creator"))
 				.build();
 	}
 

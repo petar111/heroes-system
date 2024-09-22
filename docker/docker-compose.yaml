@@ -11,13 +11,13 @@ services:
     networks:
       - heroes-system-network
 
-  heroes-content-creator:
+  heroes-origin-service:
     build:
-      context: ../code/heroescontentcreator
+      context: ../code/heroesoriginservice
     ports:
       - 8081:8080
     environment:
-      DATABASE_DB: heroescontentcreatordb
+      DATABASE_DB: heroesoriginservicedb
       DATABASE_HOST: db
       DATABASE_PORT: 5432
       DATABASE_USERNAME: postgres
@@ -84,7 +84,7 @@ services:
     networks:
       - heroes-system-network
     environment:
-      POSTGRES_DB: heroescontentcreatordb
+      POSTGRES_DB: heroesoriginservicedb
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
     expose:
       - "5432"

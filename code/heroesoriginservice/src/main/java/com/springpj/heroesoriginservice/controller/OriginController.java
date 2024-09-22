@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.controller;
+package com.springpj.heroesoriginservice.controller;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springpj.heroescontentcreator.model.dto.OriginDto;
-import com.springpj.heroescontentcreator.model.dto.OriginVersionDto;
-import com.springpj.heroescontentcreator.service.OriginService;
+import com.springpj.heroesoriginservice.model.dto.OriginDto;
+import com.springpj.heroesoriginservice.model.dto.OriginVersionDto;
+import com.springpj.heroesoriginservice.service.OriginService;
 
 @RestController
 @RequestMapping("origin")

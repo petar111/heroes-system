@@ -1,8 +1,8 @@
-package com.springpj.heroescontentcreator.repository;
+package com.springpj.heroesoriginservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.springpj.heroescontentcreator.model.authorization.Authority;
+import com.springpj.heroesoriginservice.model.authorization.Authority;
 
 public interface AuthorityRepository extends JpaRepository<Authority, Long> {
 

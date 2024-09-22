@@ -1,12 +1,12 @@
-package com.springpj.heroescontentcreator.mapper;
+package com.springpj.heroesoriginservice.mapper;
 
 import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.springpj.heroescontentcreator.model.dto.UserDto;
-import com.springpj.heroescontentcreator.model.user.User;
+import com.springpj.heroesoriginservice.model.dto.UserDto;
+import com.springpj.heroesoriginservice.model.user.User;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {

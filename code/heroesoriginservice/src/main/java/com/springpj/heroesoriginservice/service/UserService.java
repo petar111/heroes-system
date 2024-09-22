@@ -1,9 +1,9 @@
-package com.springpj.heroescontentcreator.service;
+package com.springpj.heroesoriginservice.service;
 
 import org.springframework.data.domain.Page;
 
-import com.springpj.heroescontentcreator.model.dto.UserDto;
-import com.springpj.heroescontentcreator.model.dto.paging.PageRequestDto;
+import com.springpj.heroesoriginservice.model.dto.UserDto;
+import com.springpj.heroesoriginservice.model.dto.paging.PageRequestDto;
 
 public interface UserService {
 	

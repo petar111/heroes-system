@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.service.impl;
+package com.springpj.heroesoriginservice.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -6,16 +6,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.springpj.heroescontentcreator.errorhandler.exception.UserAlreadyExistsException;
-import com.springpj.heroescontentcreator.errorhandler.exception.UserNotFoundByEmailException;
-import com.springpj.heroescontentcreator.errorhandler.exception.UserNotFoundByIdException;
-import com.springpj.heroescontentcreator.errorhandler.exception.UserNotFoundByUsernameException;
-import com.springpj.heroescontentcreator.mapper.UserMapper;
-import com.springpj.heroescontentcreator.model.dto.UserDto;
-import com.springpj.heroescontentcreator.model.dto.paging.PageRequestDto;
-import com.springpj.heroescontentcreator.model.user.User;
-import com.springpj.heroescontentcreator.repository.UserRepository;
-import com.springpj.heroescontentcreator.service.UserService;
+import com.springpj.heroesoriginservice.errorhandler.exception.UserAlreadyExistsException;
+import com.springpj.heroesoriginservice.errorhandler.exception.UserNotFoundByEmailException;
+import com.springpj.heroesoriginservice.errorhandler.exception.UserNotFoundByIdException;
+import com.springpj.heroesoriginservice.errorhandler.exception.UserNotFoundByUsernameException;
+import com.springpj.heroesoriginservice.mapper.UserMapper;
+import com.springpj.heroesoriginservice.model.dto.UserDto;
+import com.springpj.heroesoriginservice.model.dto.paging.PageRequestDto;
+import com.springpj.heroesoriginservice.model.user.User;
+import com.springpj.heroesoriginservice.repository.UserRepository;
+import com.springpj.heroesoriginservice.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

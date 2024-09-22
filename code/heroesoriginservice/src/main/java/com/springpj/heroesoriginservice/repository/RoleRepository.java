@@ -1,10 +1,10 @@
-package com.springpj.heroescontentcreator.repository;
+package com.springpj.heroesoriginservice.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.springpj.heroescontentcreator.model.authorization.Role;
+import com.springpj.heroesoriginservice.model.authorization.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long>{
 

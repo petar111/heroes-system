@@ -1,11 +1,11 @@
-package com.springpj.heroescontentcreator.mapper;
+package com.springpj.heroesoriginservice.mapper;
 
 import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.springpj.heroescontentcreator.model.authorization.Role;
-import com.springpj.heroescontentcreator.model.dto.role.RoleDto;
+import com.springpj.heroesoriginservice.model.authorization.Role;
+import com.springpj.heroesoriginservice.model.dto.role.RoleDto;
 
 @Mapper(componentModel = "spring")
 public interface RoleMapper {

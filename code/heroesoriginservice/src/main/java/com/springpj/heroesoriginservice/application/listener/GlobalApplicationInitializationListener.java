@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.application.listener;
+package com.springpj.heroesoriginservice.application.listener;
 
 import java.util.stream.Collectors;
 
@@ -8,10 +8,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.springpj.heroescontentcreator.authorization.context.AuthorizationContext;
-import com.springpj.heroescontentcreator.repository.AccessTypeRepository;
-import com.springpj.heroescontentcreator.repository.AuthorityRepository;
-import com.springpj.heroescontentcreator.repository.ResourceRepository;
+import com.springpj.heroesoriginservice.authorization.context.AuthorizationContext;
+import com.springpj.heroesoriginservice.repository.AccessTypeRepository;
+import com.springpj.heroesoriginservice.repository.AuthorityRepository;
+import com.springpj.heroesoriginservice.repository.ResourceRepository;
 
 @Component
 public class GlobalApplicationInitializationListener {

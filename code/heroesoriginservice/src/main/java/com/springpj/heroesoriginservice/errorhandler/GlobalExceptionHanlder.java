@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.errorhandler;
+package com.springpj.heroesoriginservice.errorhandler;
 
 import java.util.stream.Collectors;
 
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.springpj.heroescontentcreator.errorhandler.ErrorResponse.ErrorResponseBuilder;
-import com.springpj.heroescontentcreator.errorhandler.exception.AuthenticationFailedException;
-import com.springpj.heroescontentcreator.errorhandler.exception.NotFoundException;
+import com.springpj.heroesoriginservice.errorhandler.ErrorResponse.ErrorResponseBuilder;
+import com.springpj.heroesoriginservice.errorhandler.exception.AuthenticationFailedException;
+import com.springpj.heroesoriginservice.errorhandler.exception.NotFoundException;
 
 import jakarta.validation.ConstraintViolationException;
 

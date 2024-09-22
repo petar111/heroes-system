@@ -10,7 +10,7 @@ import com.springpj.heroesapigateway.dto.UserDto;
 import com.springpj.heroesapigateway.security.constants.ClientConstants;
 
 
-@FeignClient(name = ClientConstants.HEROES_CONTENT_CREATOR_APP_NAME, 
+@FeignClient(name = ClientConstants.HEROES_ORIGIN_SERVICE_APP_NAME,
 				contextId = "user-client-proxy")
 public interface UserClientProxy{
 

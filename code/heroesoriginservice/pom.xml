@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.springpj</groupId>
-	<artifactId>heroescontentcreator</artifactId>
+	<artifactId>heroesoriginservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>heroescontentcreator</name>
+	<name>heroesoriginservice</name>
 
 	<description>Application for creating the content for the game
 		&quot;Heroes&quot;</description>

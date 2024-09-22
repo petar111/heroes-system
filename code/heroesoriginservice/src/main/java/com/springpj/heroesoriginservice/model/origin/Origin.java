@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.model.origin;
+package com.springpj.heroesoriginservice.model.origin;
 
 import java.util.Date;
 

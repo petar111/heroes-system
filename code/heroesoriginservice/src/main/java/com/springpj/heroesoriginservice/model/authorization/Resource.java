@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.model.authorization;
+package com.springpj.heroesoriginservice.model.authorization;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

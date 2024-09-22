@@ -1,9 +1,9 @@
-package com.springpj.heroescontentcreator.service;
+package com.springpj.heroesoriginservice.service;
 
 import java.util.Set;
 
-import com.springpj.heroescontentcreator.model.dto.AuthorityDto;
-import com.springpj.heroescontentcreator.model.dto.role.RoleDto;
+import com.springpj.heroesoriginservice.model.dto.AuthorityDto;
+import com.springpj.heroesoriginservice.model.dto.role.RoleDto;
 
 public interface RoleService {
 	

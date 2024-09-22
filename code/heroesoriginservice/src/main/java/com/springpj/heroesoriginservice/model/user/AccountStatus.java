@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.model.user;
+package com.springpj.heroesoriginservice.model.user;
 
 public enum AccountStatus {
 	ACTIVE,

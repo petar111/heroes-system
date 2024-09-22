@@ -1,12 +1,12 @@
-package com.springpj.heroescontentcreator.mapper;
+package com.springpj.heroesoriginservice.mapper;
 
 import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.springpj.heroescontentcreator.model.dto.OriginVersionDto;
-import com.springpj.heroescontentcreator.model.version.OriginVersion;
+import com.springpj.heroesoriginservice.model.dto.OriginVersionDto;
+import com.springpj.heroesoriginservice.model.version.OriginVersion;
 
 @Mapper(componentModel = "spring", uses = {OriginMapper.class})
 public interface OriginVersionMapper {

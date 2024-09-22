@@ -1,9 +1,9 @@
-package com.springpj.heroescontentcreator.model.dto;
+package com.springpj.heroesoriginservice.model.dto;
 
 import java.util.Date;
 
-import com.springpj.heroescontentcreator.model.user.AccountStatus;
-import com.springpj.heroescontentcreator.model.validation.ValidPassword;
+import com.springpj.heroesoriginservice.model.user.AccountStatus;
+import com.springpj.heroesoriginservice.model.validation.ValidPassword;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

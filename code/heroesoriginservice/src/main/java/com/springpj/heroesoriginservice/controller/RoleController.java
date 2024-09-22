@@ -1,4 +1,4 @@
-package com.springpj.heroescontentcreator.controller;
+package com.springpj.heroesoriginservice.controller;
 
 import java.util.Set;
 
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springpj.heroescontentcreator.model.dto.AuthorityDto;
-import com.springpj.heroescontentcreator.model.dto.role.RoleDto;
-import com.springpj.heroescontentcreator.service.RoleService;
+import com.springpj.heroesoriginservice.model.dto.AuthorityDto;
+import com.springpj.heroesoriginservice.model.dto.role.RoleDto;
+import com.springpj.heroesoriginservice.service.RoleService;
 
 @RestController
 @RequestMapping("role")

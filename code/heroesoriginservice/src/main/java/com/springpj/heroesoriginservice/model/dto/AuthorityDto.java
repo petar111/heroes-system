@@ -1,6 +1,6 @@
-package com.springpj.heroescontentcreator.model.dto;
+package com.springpj.heroesoriginservice.model.dto;
 
-import com.springpj.heroescontentcreator.authorization.context.AuthorizationContext;
+import com.springpj.heroesoriginservice.authorization.context.AuthorizationContext;
 
 public class AuthorityDto {
 	

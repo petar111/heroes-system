@@ -1,5 +1,5 @@
 package com.springpj.heroesapigateway.security.constants;
 
 public interface ClientConstants {
-	public static final String HEROES_CONTENT_CREATOR_APP_NAME = "heroes-content-creator";
+	String HEROES_ORIGIN_SERVICE_APP_NAME = "heroes-origin-service";
 }

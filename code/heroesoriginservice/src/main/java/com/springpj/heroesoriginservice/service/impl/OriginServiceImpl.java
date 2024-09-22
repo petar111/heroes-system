@@ -1,19 +1,19 @@
-package com.springpj.heroescontentcreator.service.impl;
+package com.springpj.heroesoriginservice.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springpj.heroescontentcreator.errorhandler.exception.OriginNotFoundByIdException;
-import com.springpj.heroescontentcreator.mapper.OriginMapper;
-import com.springpj.heroescontentcreator.mapper.OriginVersionMapper;
-import com.springpj.heroescontentcreator.model.dto.OriginDto;
-import com.springpj.heroescontentcreator.model.dto.OriginVersionDto;
-import com.springpj.heroescontentcreator.model.origin.Origin;
-import com.springpj.heroescontentcreator.repository.OriginRepository;
-import com.springpj.heroescontentcreator.repository.OriginVersionRepository;
-import com.springpj.heroescontentcreator.service.OriginService;
+import com.springpj.heroesoriginservice.errorhandler.exception.OriginNotFoundByIdException;
+import com.springpj.heroesoriginservice.mapper.OriginMapper;
+import com.springpj.heroesoriginservice.mapper.OriginVersionMapper;
+import com.springpj.heroesoriginservice.model.dto.OriginDto;
+import com.springpj.heroesoriginservice.model.dto.OriginVersionDto;
+import com.springpj.heroesoriginservice.model.origin.Origin;
+import com.springpj.heroesoriginservice.repository.OriginRepository;
+import com.springpj.heroesoriginservice.repository.OriginVersionRepository;
+import com.springpj.heroesoriginservice.service.OriginService;
 
 @Service
 public class OriginServiceImpl implements OriginService {

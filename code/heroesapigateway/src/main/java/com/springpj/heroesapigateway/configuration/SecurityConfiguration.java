@@ -39,7 +39,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) throws Exception {
     	log.debug(SecurityWebFilterChain.class + " entry point.");
-        http.csrf(csrf -> csrf.disable())
+        http.csrf(ServerHttpSecurity.CsrfSpec::disable)
         		.authorizeExchange(e -> e
         				.pathMatchers("/heroes-authorization-server/auth/**").permitAll()
         				.anyExchange().authenticated())

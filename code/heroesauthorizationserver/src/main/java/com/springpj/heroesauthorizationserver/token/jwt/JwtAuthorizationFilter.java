@@ -37,27 +37,27 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
     	log.debug("JWTTokenProvider entry point.");
-        if (request.getMethod().equalsIgnoreCase(SecurityConstants.JWT_OPTIONS)) {
-            response.setStatus(HttpStatus.OK.value());
-        } else {
-            String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-            if (authorizationHeader == null || !authorizationHeader.startsWith(SecurityConstants.JWT_TOKEN_PREFIX)) {
-                filterChain.doFilter(request, response);
-                return;
-            }
-            String token = authorizationHeader.substring(SecurityConstants.JWT_TOKEN_PREFIX.length());
-            String username = jwtTokenProvider.getSubject(token);
-            if (jwtTokenProvider.isTokenValid(username, token) &&
-                    SecurityContextHolder.getContext().getAuthentication() == null) {
-                List<GrantedAuthority> authorities = jwtTokenProvider.getAuthorities(token);
-                Authentication authentication =
-                        jwtTokenProvider.getAuthentication(username, authorities, request);
+        // if (request.getMethod().equalsIgnoreCase(SecurityConstants.JWT_OPTIONS)) {
+        //     response.setStatus(HttpStatus.OK.value());
+        // } else {
+        //     String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        //     if (authorizationHeader == null || !authorizationHeader.startsWith(SecurityConstants.JWT_TOKEN_PREFIX)) {
+        //         filterChain.doFilter(request, response);
+        //         return;
+        //     }
+        //     String token = authorizationHeader.substring(SecurityConstants.JWT_TOKEN_PREFIX.length());
+        //     String username = jwtTokenProvider.getSubject(token);
+        //     if (jwtTokenProvider.isTokenValid(username, token) &&
+        //             SecurityContextHolder.getContext().getAuthentication() == null) {
+        //         List<GrantedAuthority> authorities = jwtTokenProvider.getAuthorities(token);
+        //         Authentication authentication =
+        //                 jwtTokenProvider.getAuthentication(username, authorities, request);
                 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            } else {
-                SecurityContextHolder.clearContext();
-            }
-        }
+        //         SecurityContextHolder.getContext().setAuthentication(authentication);
+        //     } else {
+        //         SecurityContextHolder.clearContext();
+        //     }
+        // }
         filterChain.doFilter(request, response);
     }
 }

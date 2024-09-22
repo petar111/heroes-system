@@ -1,5 +1,16 @@
 services:
 
+  naming-server:
+    build:
+      context: ../code/heroesnamingserver
+    mem_limit: 700m
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - heroes-system-network
+
   heroes-content-creator:
     build:
       context: ../code/heroescontentcreator
@@ -51,14 +62,7 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
 
-  naming-server:
-    build:
-      context: ../code/heroesnamingserver
-    mem_limit: 700m
-    ports:
-      - "8761:8761"
-    networks:
-      - heroes-system-network
+  
 
   zipkin-server:
     image: openzipkin/zipkin:2.23

@@ -50,8 +50,7 @@ public class JWTTokenProvider {
                                             ServerHttpRequest request) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                 = new UsernamePasswordAuthenticationToken(username, null, authorities);
-//        usernamePasswordAuthenticationToken.setDetails(
-//                new WebAuthenticationDetailsSource().buildDetails(request));
+
         return usernamePasswordAuthenticationToken;
     }
 

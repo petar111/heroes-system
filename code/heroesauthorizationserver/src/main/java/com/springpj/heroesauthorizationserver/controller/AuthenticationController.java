@@ -1,6 +1,8 @@
 package com.springpj.heroesauthorizationserver.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,15 @@ import com.springpj.heroesauthorizationserver.service.AuthenticationService;
 import com.springpj.heroesauthorizationserver.token.jwt.JWTTokenProvider;
 
 import jakarta.validation.Valid;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 
 @RestController
 @RequestMapping("auth")
 public class AuthenticationController {
-	
+
+    private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
     private final AuthenticationService authenticationService;
     private final JWTTokenProvider jwtTokenProvider;
 
@@ -33,16 +38,11 @@ public class AuthenticationController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<UserDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto){
+    public Mono<ResponseEntity<UserDto>> login(@RequestBody @Valid LoginRequestDto loginRequestDto){
 
-        try {
-            UserDto result = authenticationService.login(loginRequestDto);
-            HttpHeaders headers = getJwtHeader(authenticationService.getUserPrincipal(loginRequestDto.getUsername()));
-            return new ResponseEntity<>(result, headers, HttpStatus.OK);
-        }catch (Exception ex){
-            throw new AuthenticationFailedException("Login failed. Check your username and/or password.");
-        }
-
+        return authenticationService.login(loginRequestDto)
+                .map(UserPrincipal::new)
+                .map(r -> ResponseEntity.ok().headers(getJwtHeader(r)).body(r.getUser()));
     }
     
     @PostMapping("authenticate")
@@ -51,11 +51,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody @Valid RegisterRequestDto registerRequestDto){
+    public Mono<ResponseEntity<UserDto>> register(@RequestBody @Valid RegisterRequestDto registerRequestDto){
 
-            UserDto registeredUser = authenticationService.register(registerRequestDto);
-            HttpHeaders headers = getJwtHeader(authenticationService.getUserPrincipal(registeredUser.getUsername()));
-            return new ResponseEntity<>(registeredUser, headers, HttpStatus.OK);
+            return authenticationService.register(registerRequestDto).map(UserPrincipal::new)
+                    .map(r -> ResponseEntity.ok().headers(getJwtHeader(r)).body(r.getUser()));
 
     }
 

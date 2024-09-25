@@ -5,5 +5,6 @@ WORKDIR /app
 COPY . .
 
 RUN ./mvnw dependency:go-offline
+RUN ./mvnw clean
  
 CMD ["./mvnw", "spring-boot:run"]

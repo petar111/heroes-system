@@ -1,14 +1,13 @@
 package com.springpj.heroesauthorizationserver.service.impl;
 
+import com.springpj.heroesauthorizationserver.client.UserClientProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.springpj.heroesauthorizationserver.client.RoleClientProxy;
-import com.springpj.heroesauthorizationserver.client.UserClientProxy;
 import com.springpj.heroesauthorizationserver.dto.LoginRequestDto;
 import com.springpj.heroesauthorizationserver.dto.RegisterRequestDto;
 import com.springpj.heroesauthorizationserver.dto.RoleDto;
@@ -17,58 +16,62 @@ import com.springpj.heroesauthorizationserver.mapper.UserMapper;
 import com.springpj.heroesauthorizationserver.model.user.AccountStatus;
 import com.springpj.heroesauthorizationserver.model.user.UserPrincipal;
 import com.springpj.heroesauthorizationserver.service.AuthenticationService;
+import reactor.core.publisher.Mono;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
 	Logger log = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
 
-	private final AuthenticationManager authenticationManager;
+	private final ReactiveAuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
 	private final UserMapper userMapper;
 
 	private final UserClientProxy userClient;
-	private final RoleClientProxy roleClient;
 
-	public AuthenticationServiceImpl(AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder,
-			UserMapper userMapper, UserClientProxy userClient, RoleClientProxy roleClient) {
+	public AuthenticationServiceImpl(ReactiveAuthenticationManager authenticationManager, PasswordEncoder passwordEncoder,
+			UserMapper userMapper, UserClientProxy userClient) {
 		this.authenticationManager = authenticationManager;
 		this.passwordEncoder = passwordEncoder;
 		this.userMapper = userMapper;
 		this.userClient = userClient;
-		this.roleClient = roleClient;
 	}
 
 	@Override
-	public UserDto login(LoginRequestDto loginRequestDto) {
+	public Mono<UserDto> login(LoginRequestDto loginRequestDto) {
 		authenticate(loginRequestDto.getUsername(), loginRequestDto.getPassword());
 
 		return userClient.findByUsername(loginRequestDto.getUsername());
 	}
 
 	@Override
-	public UserPrincipal getUserPrincipal(String username) {
-		return new UserPrincipal(userClient.findByUsername(username));
+	public Mono<UserPrincipal> getUserPrincipal(String username) {
+
+		Mono<UserDto> user = userClient.findByUsername(username);
+
+		return user.map(UserPrincipal::new);
 	}
 
 	@Override
-	public UserDto register(RegisterRequestDto registerRequestDto) {
+	public Mono<UserDto> register(RegisterRequestDto registerRequestDto) {
 
-		UserDto user = prepareUserForRegistration(registerRequestDto);
-		return userClient.save(user);
+		Mono<UserDto> user = prepareUserForRegistration(registerRequestDto);
+		return user.map(u -> userClient.save(u).block());
 	}
 
-	private UserDto prepareUserForRegistration(RegisterRequestDto registerRequestDto) {
+	private Mono<UserDto> prepareUserForRegistration(RegisterRequestDto registerRequestDto) {
 		UserDto result = userMapper.toUserDto(registerRequestDto);
 
 		result.setPassword(passwordEncoder.encode(result.getPassword()));
 		result.setAccountStatus(AccountStatus.ACTIVE);
 		result.setCredentialsExpired(false);
 
-		RoleDto role = roleClient.findByName(registerRequestDto.getRoleName());
+		Mono<RoleDto> role = userClient.findRoleByName(registerRequestDto.getRoleName());
 
-		result.setRoleId(role.getId());
-		return result;
+		return role.map(r -> {
+			result.setRoleId(r.getId());
+			return result;
+		});
 	}
 
 	private void authenticate(String username, String password) {

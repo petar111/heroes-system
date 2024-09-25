@@ -1,4 +1,4 @@
-package com.springpj.heroesoriginservice.persistence.configuration;
+package com.springpj.heroesoriginservice.service.configuration;
 
 import java.util.Optional;
 

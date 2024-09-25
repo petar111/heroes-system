@@ -44,7 +44,9 @@ public class JwtAuthorizationFilter implements WebFilter {
         Optional<String> authorizationHeader = request.getHeaders().getOrEmpty(HttpHeaders.AUTHORIZATION)
                 .stream().filter(a -> a.startsWith(SecurityConstants.JWT_TOKEN_PREFIX))
                 .findAny();
+
         if (authorizationHeader.isEmpty()) {
+            log.info("JwtAuthorizationFilter - DONE - Authorization header empty");
             return chain.filter(exchange);
         }
 
@@ -58,8 +60,10 @@ public class JwtAuthorizationFilter implements WebFilter {
             Authentication authentication =
                     jwtTokenProvider.getAuthentication(username, authorities, request);
 
+            log.info("JwtAuthorizationFilter - DONE");
             return chain.filter(exchange).contextWrite(ctx -> ReactiveSecurityContextHolder.withAuthentication(authentication));
         } else {
+            log.info("JwtAuthorizationFilter - DONE - Failed authentication");
             return chain.filter(exchange).contextWrite(ReactiveSecurityContextHolder.clearContext());
         }
 	}

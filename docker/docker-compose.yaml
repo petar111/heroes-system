@@ -5,11 +5,25 @@ services:
       context: ../code/heroesnamingserver
     mem_limit: 700m
     environment:
-      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
     ports:
       - "8761:8761"
     networks:
       - heroes-system-network
+      
+  api-gateway:
+    build:
+      context: ../code/heroesapigateway
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    networks:
+      - heroes-system-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
 
   heroes-origin-service:
     build:
@@ -27,12 +41,13 @@ services:
       HIBERNATE_DDL_AUTO: none
       LIQUIBASE_ENABLE: true
       HIBERNATE_SHOW_SQL: false
-      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
-      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
     networks:
       - heroes-system-network
     depends_on:
       - naming-server
+      - api-gateway
       - db
 
   heroes-user-service:
@@ -51,12 +66,13 @@ services:
       HIBERNATE_DDL_AUTO: none
       LIQUIBASE_ENABLE: true
       HIBERNATE_SHOW_SQL: false
-      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
-      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
     networks:
       - heroes-system-network
     depends_on:
       - naming-server
+      - api-gateway
       - db
 
   heroes-authorization-server:
@@ -65,29 +81,17 @@ services:
     ports:
       - "8799:8799"
     environment:
-      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
-      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      SERVICES_APIGATEWAY_BASEURL: http://api-gateway:8765/
+      SERVICES_HEROESUSERSERVICE_NAME: heroes-user-service
     networks:
       - heroes-system-network
     depends_on:
       - naming-server
-
-  api-gateway:
-    build:
-      context: ../code/heroesapigateway
-    mem_limit: 700m
-    ports:
-      - "8765:8765"
-    networks:
-      - heroes-system-network
-    depends_on:
-      - naming-server
-    environment:
-      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
-      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
-
+      - api-gateway
+      - heroes-user-service
   
-
   zipkin-server:
     image: openzipkin/zipkin:2.23
     mem_limit: 300m

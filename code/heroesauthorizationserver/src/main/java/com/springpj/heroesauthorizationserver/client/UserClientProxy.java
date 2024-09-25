@@ -12,7 +12,8 @@ import reactivefeign.spring.config.ReactiveFeignClient;
 import reactor.core.publisher.Mono;
 
 @Component
-@ReactiveFeignClient(name = ClientConstants.HEROES_USER_SERVICE_APPLICATION_NAME, url = "heroes-user-service:8050")
+@ReactiveFeignClient(name = "${SERVICES_HEROESUSERSERVICE_NAME}",
+		url = "${SERVICES_HEROESUSERSERVICE_NAME}:${SERVICES_HEROESUSERSERVICE_PORT}")
 public interface UserClientProxy{
 
 	@GetMapping("/user/@/{username}")

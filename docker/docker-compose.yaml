@@ -31,12 +31,9 @@ services:
     ports:
       - 8081:8080
     environment:
-      DATABASE_DB: heroesoriginservicedb
-      DATABASE_HOST: db
-      DATABASE_PORT: 5432
+      DATABASE_URL: jdbc:postgresql://db:5432/heroesoriginservicedb
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: root
-      DATABASE_PROTOCOL: postgresql
       SERVICE_PORT: 8080
       HIBERNATE_DDL_AUTO: none
       LIQUIBASE_ENABLE: true
@@ -56,12 +53,9 @@ services:
     ports:
       - 8050:8050
     environment:
-      DATABASE_DB: heroesuserservicedb
-      DATABASE_HOST: db
-      DATABASE_PORT: 5432
+      DATABASE_URL: jdbc:postgresql://db:5432/heroesuserservicedb
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: root
-      DATABASE_PROTOCOL: postgresql
       SERVICE_PORT: 8050
       HIBERNATE_DDL_AUTO: none
       LIQUIBASE_ENABLE: true
@@ -85,6 +79,7 @@ services:
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
       SERVICES_APIGATEWAY_BASEURL: http://api-gateway:8765/
       SERVICES_HEROESUSERSERVICE_NAME: heroes-user-service
+      SERVICES_HEROESUSERSERVICE_PORT: 8050
     networks:
       - heroes-system-network
     depends_on:

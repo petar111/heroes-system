@@ -25,13 +25,3 @@ alter table if exists faction_version
    add constraint FK1_faction 
    foreign key (faction_id) 
    references faction;
-   
- --changeset petar:3
- alter table faction_version drop column version;
-
---changeset petar:6.1
-alter table faction_version drop constraint created_by_fk;
-alter table faction_version drop column created_by_id;
-
---changeset petar:6.2
-alter table faction_version add column created_by_id bigint;

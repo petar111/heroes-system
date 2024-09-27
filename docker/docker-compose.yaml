@@ -1,5 +1,37 @@
 services:
-
+  zookeeper-1:
+    image: confluentinc/cp-zookeeper:7.4.4
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 2181:2181
+  
+  kafka-1:
+    image: confluentinc/cp-kafka:7.4.4
+    depends_on:
+      - zookeeper-1
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  
+  config-server:
+    build:
+      context: ../code/heroesconfigserver
+    mem_limit: 700m
+    environment:
+      CONFIG_FILE_URI: file:/config/local-repo
+    ports:
+      - "8888:8888"
+    networks:
+      - heroes-system-network
+  
   naming-server:
     build:
       context: ../code/heroesnamingserver
@@ -10,6 +42,8 @@ services:
       - "8761:8761"
     networks:
       - heroes-system-network
+    depends_on:
+      - config-server
       
   api-gateway:
     build:
@@ -24,6 +58,8 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      CONFIG_SERVER_URL: http://config-server:8888/
+      
 
   heroes-origin-service:
     build:
@@ -40,6 +76,7 @@ services:
       HIBERNATE_SHOW_SQL: false
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      CONFIG_SERVER_URL: http://config-server:8888/
     networks:
       - heroes-system-network
     depends_on:
@@ -62,6 +99,30 @@ services:
       HIBERNATE_SHOW_SQL: false
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      CONFIG_SERVER_URL: http://config-server:8888/
+    networks:
+      - heroes-system-network
+    depends_on:
+      - naming-server
+      - api-gateway
+      - db
+
+  heroes-company-service:
+    build:
+      context: ../code/heroescompanyservice
+    ports:
+      - 8071:8071
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/heroescompanyservicedb
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      SERVICE_PORT: 8071
+      HIBERNATE_DDL_AUTO: none
+      LIQUIBASE_ENABLE: true
+      HIBERNATE_SHOW_SQL: false
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      CONFIG_SERVER_URL: http://config-server:8888/
     networks:
       - heroes-system-network
     depends_on:
@@ -84,6 +145,7 @@ services:
       HIBERNATE_SHOW_SQL: false
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      CONFIG_SERVER_URL: http://config-server:8888/
     networks:
       - heroes-system-network
     depends_on:
@@ -102,6 +164,7 @@ services:
       SERVICES_APIGATEWAY_BASEURL: http://api-gateway:8765/
       SERVICES_HEROESUSERSERVICE_NAME: heroes-user-service
       SERVICES_HEROESUSERSERVICE_PORT: 8050
+      CONFIG_SERVER_URL: http://config-server:8888/
     networks:
       - heroes-system-network
     depends_on:
@@ -130,7 +193,7 @@ services:
     networks:
       - heroes-system-network
     environment:
-      POSTGRES_MULTIPLE_DATABASES: heroesoriginservicedb,heroesuserservicedb,heroesfactionservicedb
+      POSTGRES_MULTIPLE_DATABASES: heroesoriginservicedb,heroesuserservicedb,heroesfactionservicedb,heroescompanyservicedb
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
     expose:
       - "5432"

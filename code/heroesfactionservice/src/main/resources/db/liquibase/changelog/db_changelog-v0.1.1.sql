@@ -15,9 +15,9 @@ create table faction_version (
         date_created timestamp(6),
         id bigserial not null,
         faction_id bigint not null,
-        version bigint not null unique,
+        version bigint not null,
         description varchar(255),
-        name varchar(255) not null unique,
+        name varchar(255) not null,
         primary key (id)
     );
 

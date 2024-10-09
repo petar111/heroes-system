@@ -1,11 +1,9 @@
 package com.springpj.heroescompanyservice.controller;
 
-import java.util.List;
-
+import com.springpj.heroescompanyservice.messaging.kafka.KafkaFactionServiceHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -27,10 +25,12 @@ public class CompanyController {
 	private static final Logger log = LoggerFactory.getLogger(CompanyController.class);
 	
 	private final CompanyService companyService;
+	private final KafkaFactionServiceHandler kafkaFactionServiceHandler;
 	
 	@Autowired
-	public CompanyController(CompanyService companyService) {
+	public CompanyController(CompanyService companyService, KafkaFactionServiceHandler kafkaFactionServiceHandler) {
 		this.companyService = companyService;
+		this.kafkaFactionServiceHandler = kafkaFactionServiceHandler;
 	}
 	
 	@GetMapping("{id}")
@@ -53,7 +53,11 @@ public class CompanyController {
 
 	@PostMapping("add")
 	public CompanyDto save(@RequestBody CompanyDto dto) {
-		return companyService.save(dto);
+
+		CompanyDto createCompany = companyService.save(dto);
+		kafkaFactionServiceHandler.onCompanyCreated(createCompany.getName());
+
+		return createCompany;
 	}
 	
 	@PutMapping("{id}/update")

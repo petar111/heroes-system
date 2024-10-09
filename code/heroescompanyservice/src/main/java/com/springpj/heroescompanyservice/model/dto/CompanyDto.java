@@ -18,6 +18,8 @@ public class CompanyDto {
 	
 	private Date dateCreated;
 	private Date dateLastUpdated;
+
+	private Long factionId;
 	
 	
 	public Long getId() {
@@ -49,6 +51,12 @@ public class CompanyDto {
 	}
 	public void setDateLastUpdated(Date dateLastUpdated) {
 		this.dateLastUpdated = dateLastUpdated;
+	}
+	public Long getFactionId() {
+		return factionId;
+	}
+	public void setFactionId(Long factionId) {
+		this.factionId = factionId;
 	}
 
 }

@@ -51,6 +51,8 @@ dependencies {
 	implementation 'org.postgresql:postgresql'
 	implementation 'org.liquibase:liquibase-core'
 
+	implementation 'org.springframework.kafka:spring-kafka'
+
 
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 

@@ -36,6 +36,9 @@ public class Company {
 	@UpdateTimestamp
 	@Column(name = "DATE_LAST_UPDATED")
 	private Date dateLastUpdated;
+
+	@Column(name = "FACTION_ID")
+	private Long factionId;
 	
 	
 	public Long getId() {
@@ -67,6 +70,12 @@ public class Company {
 	}
 	public void setDateLastUpdated(Date dateLastUpdated) {
 		this.dateLastUpdated = dateLastUpdated;
+	}
+	public Long getFactionId() {
+		return factionId;
+	}
+	public void setFactionId(Long factionId) {
+		this.factionId = factionId;
 	}
 	
 }

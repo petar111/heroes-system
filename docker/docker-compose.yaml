@@ -1,4 +1,5 @@
 services:
+
   zookeeper-1:
     image: confluentinc/cp-zookeeper:7.4.4
     environment:
@@ -6,6 +7,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - 2181:2181
+    networks:
+      - heroes-system-network
   
   kafka-1:
     image: confluentinc/cp-kafka:7.4.4
@@ -16,10 +19,12 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - heroes-system-network
   
   config-server:
     build:

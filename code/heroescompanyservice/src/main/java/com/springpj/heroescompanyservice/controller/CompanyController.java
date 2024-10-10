@@ -54,10 +54,10 @@ public class CompanyController {
 	@PostMapping("add")
 	public CompanyDto save(@RequestBody CompanyDto dto) {
 
-		CompanyDto createCompany = companyService.save(dto);
-		kafkaFactionServiceHandler.onCompanyCreated(createCompany.getName());
+		CompanyDto createdCompany = companyService.save(dto);
+		kafkaFactionServiceHandler.onCompanyCreated(createdCompany);
 
-		return createCompany;
+		return createdCompany;
 	}
 	
 	@PutMapping("{id}/update")

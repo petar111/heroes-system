@@ -1,19 +1,20 @@
 package com.springpj.heroescompanyservice.messaging.kafka;
 
+import com.springpj.heroescompanyservice.model.dto.CompanyDto;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaFactionServiceHandler {
 
-    private final KafkaTemplate<String, String> template;
+    private final KafkaTemplate<String, CompanyDto> template;
 
-    public KafkaFactionServiceHandler(KafkaTemplate<String, String> template) {
+    public KafkaFactionServiceHandler(KafkaTemplate<String, CompanyDto> template) {
         this.template = template;
     }
 
-    public void onCompanyCreated(String createCompanyName){
-        template.send("company-topic", createCompanyName);
+    public void onCompanyCreated(CompanyDto company){
+        template.send("company-topic", company);
     }
 
 }

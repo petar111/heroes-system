@@ -38,7 +38,7 @@ public class FactionServiceImpl implements FactionService {
 	@Override
 	public FactionDto save(FactionDto dto) {
 		Faction savedFaction = factionRepository.save(factionMapper.toEntity(dto));
-		factionVersionRepository.save(factionMapper.toVersionEntity(savedFaction));
+//		factionVersionRepository.save(factionMapper.toVersionEntity(savedFaction));
 		return factionMapper.toDto(savedFaction);
 	}
 
@@ -58,7 +58,13 @@ public class FactionServiceImpl implements FactionService {
 		faction.setId(id);
 		return factionVersionMapper.toDtoList(factionVersionRepository.findAllByFaction(faction));
 	}
-	
-	
+
+	@Override
+	public FactionDto deleteById(Long id) {
+		FactionDto deletedFaction = factionMapper.toDto(factionRepository.findById(id).orElseThrow(() -> new FactionNotFoundByIdException(id)));
+		factionRepository.deleteById(id);
+		return deletedFaction;
+	}
+
 
 }

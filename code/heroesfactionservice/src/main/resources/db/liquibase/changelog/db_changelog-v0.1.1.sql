@@ -25,3 +25,15 @@ alter table if exists faction_version
    add constraint FK1_faction 
    foreign key (faction_id) 
    references faction;
+
+--changeset petar:2.1
+alter table if exists faction_version
+   drop constraint FK1_faction;
+
+alter table if exists faction_version
+   add constraint FK1_faction
+   foreign key (faction_id)
+   references faction(id) ON DELETE CASCADE;
+
+--changeset petar:2.2
+drop table faction_version;

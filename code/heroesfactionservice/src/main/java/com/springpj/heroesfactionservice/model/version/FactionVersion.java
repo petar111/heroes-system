@@ -45,9 +45,6 @@ public class FactionVersion {
 	@Column(name = "DATE_CREATED")
 	private Date dateCreated;
 
-	@CreatedBy
-	@Column(name = "CREATED_BY_ID")
-	private Long createdById;
 
 	public Long getId() {
 		return id;
@@ -87,14 +84,6 @@ public class FactionVersion {
 
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
-	}
-
-	public Long getCreatedById() {
-		return createdById;
-	}
-
-	public void setCreatedById(Long createdById) {
-		this.createdById = createdById;
 	}
 	
 	

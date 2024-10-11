@@ -13,4 +13,5 @@ public interface FactionService {
 
 	List<FactionVersionDto> findAllVersionsById(Long id);
 
+    FactionDto deleteById(Long id);
 }

@@ -10,4 +10,5 @@ public interface CompanyService {
 
 	CompanyDto findById(Long id);
 
+    void deleteAllByFactionId(Long id);
 }

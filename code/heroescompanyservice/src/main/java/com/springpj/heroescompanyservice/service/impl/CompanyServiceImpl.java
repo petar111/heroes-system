@@ -38,7 +38,11 @@ public class CompanyServiceImpl implements CompanyService {
 				.orElseThrow(() -> new CompanyNotFoundByIdException(id));
 		return companyMapper.toDto(company);
 	}
-	
-	
+
+	@Override
+	public void deleteAllByFactionId(Long id) {
+		companyRepository.deleteAllByFactionId(id);
+	}
+
 
 }

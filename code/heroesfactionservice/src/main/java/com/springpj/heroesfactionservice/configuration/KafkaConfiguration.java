@@ -24,5 +24,9 @@ public class KafkaConfiguration {
         return new NewTopic("company-topic", 1, (short) 1);
     }
 
+    @Bean
+    public NewTopic factionDeletedTopic() {
+        return new NewTopic("faction-deleted-topic", 1, (short) 1);
+    }
 
 }

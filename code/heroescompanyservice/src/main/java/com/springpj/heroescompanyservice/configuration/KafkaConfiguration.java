@@ -21,8 +21,10 @@ public class KafkaConfiguration {
 
     @Bean
     public NewTopic companyTopic() {
-        return new NewTopic("company-topic", 1, (short) 1);
+        return new NewTopic("company-created-topic", 1, (short) 1);
     }
+
+
 
 
 }

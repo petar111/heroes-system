@@ -25,12 +25,10 @@ public class CompanyController {
 	private static final Logger log = LoggerFactory.getLogger(CompanyController.class);
 	
 	private final CompanyService companyService;
-	private final KafkaFactionServiceHandler kafkaFactionServiceHandler;
 	
 	@Autowired
-	public CompanyController(CompanyService companyService, KafkaFactionServiceHandler kafkaFactionServiceHandler) {
+	public CompanyController(CompanyService companyService) {
 		this.companyService = companyService;
-		this.kafkaFactionServiceHandler = kafkaFactionServiceHandler;
 	}
 	
 	@GetMapping("{id}")
@@ -53,11 +51,7 @@ public class CompanyController {
 
 	@PostMapping("add")
 	public CompanyDto save(@RequestBody CompanyDto dto) {
-
-		CompanyDto createdCompany = companyService.save(dto);
-		kafkaFactionServiceHandler.onCompanyCreated(createdCompany);
-
-		return createdCompany;
+		return companyService.save(dto);
 	}
 	
 	@PutMapping("{id}/update")

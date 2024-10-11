@@ -43,9 +43,8 @@ dependencies {
 	implementation 'io.micrometer:micrometer-tracing-bridge-otel'
 	implementation 'io.github.openfeign:feign-micrometer'
 
-	implementation 'com.playtika.reactivefeign:feign-reactor-core:4.2.1'
-	implementation 'com.playtika.reactivefeign:feign-reactor-spring-configuration:4.2.1'
-	implementation 'com.playtika.reactivefeign:feign-reactor-webclient:4.2.1'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
 
 
 	implementation 'org.postgresql:postgresql'

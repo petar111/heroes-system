@@ -111,6 +111,29 @@ services:
       - naming-server
       - api-gateway
       - db
+      
+  heroes-battletype-service:
+    build:
+      context: ../code/heroesbattletypeservice
+    ports:
+      - 8011:8011
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/heroesbattletypeservicedb
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      SERVICE_PORT: 8080
+      HIBERNATE_DDL_AUTO: none
+      LIQUIBASE_ENABLE: true
+      HIBERNATE_SHOW_SQL: false
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      CONFIG_SERVER_URL: http://config-server:8888/
+    networks:
+      - heroes-system-network
+    depends_on:
+      - naming-server
+      - api-gateway
+      - db
 
   heroes-company-service:
     build:
@@ -198,7 +221,7 @@ services:
     networks:
       - heroes-system-network
     environment:
-      POSTGRES_MULTIPLE_DATABASES: heroesoriginservicedb,heroesuserservicedb,heroesfactionservicedb,heroescompanyservicedb
+      POSTGRES_MULTIPLE_DATABASES: heroesoriginservicedb,heroesuserservicedb,heroesfactionservicedb,heroescompanyservicedb,heroesbattletypeservice
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
     expose:
       - "5432"

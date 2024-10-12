@@ -42,8 +42,7 @@ public class CompanyServiceImpl implements CompanyService {
 	public CompanyDto save(CompanyDto dto) {
 
 		log.info("Finding faction by id {} - START", dto.getFactionId());
-		FactionDto factionDto =Optional.of(factionClientProxy.findById(dto.getId()))
-				.orElseThrow(() -> new RuntimeException("Faction not found by id: " + dto.getFactionId()));
+		FactionDto factionDto = factionClientProxy.findById(dto.getFactionId());
 		log.info("Found faction by id {}, name {}", factionDto.getId(), factionDto.getName());
 		log.info("Finding faction by id {} - DONE", dto.getFactionId());
 

@@ -1,22 +1,18 @@
-package com.springpj.heroesentityservice.model.battletype;
+package com.springpj.heroesentityservice.model.entity;
 
 import java.math.BigInteger;
 import java.util.Date;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "ENTITY_DEFINITION")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class EntityDefinition {
 	
 	@Id
@@ -40,8 +36,7 @@ public class EntityDefinition {
 
 	@Column(name = "HITPOINTS")
 	private BigInteger hitpoints;
-	@Column(name = "EXPERIENCE")
-	private BigInteger experience;
+
 	
 	
 	public Long getId() {
@@ -81,13 +76,5 @@ public class EntityDefinition {
 
 	public void setHitpoints(BigInteger hitpoints) {
 		this.hitpoints = hitpoints;
-	}
-
-	public BigInteger getExperience() {
-		return experience;
-	}
-
-	public void setExperience(BigInteger experience) {
-		this.experience = experience;
 	}
 }

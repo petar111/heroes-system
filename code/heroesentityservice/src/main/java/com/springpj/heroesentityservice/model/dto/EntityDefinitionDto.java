@@ -2,6 +2,7 @@ package com.springpj.heroesentityservice.model.dto;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,20 +10,18 @@ import jakarta.validation.constraints.Size;
 public class EntityDefinitionDto {
 
 	private Long id;
-
-
 	@Size(max = 255, message = "Maximum name size is 255.")
 	@NotBlank(message = "Name must not be blank.")
 	private String name;
 	@Size(max = 255, message = "Maximum description size is 255.")
 	private String description;
-	
 	private Date dateCreated;
 	private Date dateLastUpdated;
-
 	private BigInteger hitpoints;
-
+	private List<BattleCapacityDto> battleCapacities;
 	private BigInteger experience;
+	private Long originId;
+
 	public Long getId() {
 		return id;
 	}
@@ -70,4 +69,19 @@ public class EntityDefinitionDto {
 		this.experience = experience;
 	}
 
+	public List<BattleCapacityDto> getBattleCapacities() {
+		return battleCapacities;
+	}
+
+	public void setBattleCapacities(List<BattleCapacityDto> battleCapacities) {
+		this.battleCapacities = battleCapacities;
+	}
+
+	public Long getOriginId() {
+		return originId;
+	}
+
+	public void setOriginId(Long originId) {
+		this.originId = originId;
+	}
 }

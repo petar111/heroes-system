@@ -18,7 +18,6 @@ public class EntityDefinition {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	@Size(max = 255, message = "Maximum name size is 255.")
 	@NotBlank(message = "Name must not be blank.")
 	@Column(name = "NAME", nullable = false, unique = true)
@@ -26,16 +25,16 @@ public class EntityDefinition {
 	@Size(max = 255, message = "Maximum description size is 255.")
 	@Column(name = "DESCRIPTION")
 	private String description;
-	
 	@CreationTimestamp
 	@Column(name = "DATE_CREATED")
 	private Date dateCreated;
 	@UpdateTimestamp
 	@Column(name = "DATE_LAST_UPDATED")
 	private Date dateLastUpdated;
-
 	@Column(name = "HITPOINTS")
 	private BigInteger hitpoints;
+	@Column(name = "ORIGIN_ID")
+	private Long originId;
 
 	
 	
@@ -76,5 +75,13 @@ public class EntityDefinition {
 
 	public void setHitpoints(BigInteger hitpoints) {
 		this.hitpoints = hitpoints;
+	}
+
+	public Long getOriginId() {
+		return originId;
+	}
+
+	public void setOriginId(Long originId) {
+		this.originId = originId;
 	}
 }

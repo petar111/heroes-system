@@ -1,5 +1,6 @@
 package com.springpj.heroesentityservice.service.impl;
 
+import com.springpj.heroesentityservice.client.BattleTypeClientProxy;
 import com.springpj.heroesentityservice.errorhandler.exception.CreatureNotFoundByIdException;
 import com.springpj.heroesentityservice.errorhandler.exception.EntityDefinitionNotFoundByIdException;
 import com.springpj.heroesentityservice.errorhandler.exception.HeroNotFoundByIdException;
@@ -36,9 +37,11 @@ public class EntityServiceImpl implements EntityService {
 	private final HeroMapper heroMapper;
 	private final CreatureMapper creatureMapper;
 
+	private final BattleTypeClientProxy battleTypeClientProxy;
+
 	@Autowired
 	public EntityServiceImpl(EntityDefinitionRepository entityDefinitionRepository,
-							 HeroRepository heroRepository, CreatureRepository creatureRepository, EntityDefinitionMapper entityDefinitionMapper, HeroMapper heroMapper, CreatureMapper creatureMapper) {
+							 HeroRepository heroRepository, CreatureRepository creatureRepository, EntityDefinitionMapper entityDefinitionMapper, HeroMapper heroMapper, CreatureMapper creatureMapper, BattleTypeClientProxy battleTypeClientProxy) {
 
 		this.entityDefinitionRepository = entityDefinitionRepository;
 		this.heroRepository = heroRepository;
@@ -46,6 +49,7 @@ public class EntityServiceImpl implements EntityService {
 		this.entityDefinitionMapper = entityDefinitionMapper;
 		this.heroMapper = heroMapper;
 		this.creatureMapper = creatureMapper;
+		this.battleTypeClientProxy = battleTypeClientProxy;
 	}
 
 	@Override
@@ -53,6 +57,7 @@ public class EntityServiceImpl implements EntityService {
 
 		log.info("Saving entityDefinition with name {} - START", dto.getName());
 		EntityDefinition savedEntityDefinition = entityDefinitionRepository.save(entityDefinitionMapper.toEntity(dto));
+		addEntityBattleCapacities(savedEntityDefinition, dto);
 		log.info("Saving entityDefinition with name {} - DONE", dto.getName());
 
 		EntityDefinitionDto entityDefinitionDto = entityDefinitionMapper.toDto(savedEntityDefinition);
@@ -78,6 +83,7 @@ public class EntityServiceImpl implements EntityService {
 	public HeroDto saveHero(HeroDto dto) {
 		log.info("Saving hero with name {} - START", dto.getName());
 		Hero savedHero = heroRepository.save(heroMapper.toEntity(dto));
+		addEntityBattleCapacities(savedHero, dto);
 		log.info("Saving hero with name {} - DONE", dto.getName());
 
 		HeroDto heroDto = heroMapper.toDto(savedHero);
@@ -96,11 +102,17 @@ public class EntityServiceImpl implements EntityService {
 	public CreatureDto saveCreature(CreatureDto dto) {
 		log.info("Saving creature with name {} - START", dto.getName());
 		Creature savedCreature = creatureRepository.save(creatureMapper.toEntity(dto));
+		addEntityBattleCapacities(savedCreature, dto);
 		log.info("Saving hero with name {} - DONE", dto.getName());
 
 		CreatureDto creatureDto = creatureMapper.toDto(savedCreature);
 
 		return creatureDto;
+	}
+
+	private void addEntityBattleCapacities(EntityDefinition savedEntity, EntityDefinitionDto dto){
+		dto.getBattleCapacities().forEach(c -> c.setEntityId(savedEntity.getId()));
+		battleTypeClientProxy.bulkAddCapacities(dto.getBattleCapacities());
 	}
 
 

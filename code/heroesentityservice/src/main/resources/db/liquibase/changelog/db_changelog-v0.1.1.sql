@@ -31,3 +31,6 @@ foreign key (entity_definition_id) references entity_definition (id)
 ON DELETE CASCADE;
 
 
+
+--changeset petar:3
+alter table entity_definition add column origin_id bigint;

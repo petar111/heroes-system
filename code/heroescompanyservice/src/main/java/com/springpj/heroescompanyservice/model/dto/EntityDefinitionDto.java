@@ -1,32 +1,26 @@
 package com.springpj.heroescompanyservice.model.dto;
 
-import java.util.Date;
-import java.util.List;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class CompanyDto {
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+
+public class EntityDefinitionDto {
 
 	private Long id;
-
 	@Size(max = 255, message = "Maximum name size is 255.")
 	@NotBlank(message = "Name must not be blank.")
 	private String name;
 	@Size(max = 255, message = "Maximum description size is 255.")
 	private String description;
-	
 	private Date dateCreated;
 	private Date dateLastUpdated;
+	private BigInteger hitpoints;
+	private BigInteger experience;
+	private Long originId;
 
-	private Long factionId;
-
-	private Long leadHeroId;
-
-	private List<CreatureInCompanyDto> creaturesInCompany;
-	private List<HeroInCompanyDto> heroesInCompany;
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -57,34 +51,28 @@ public class CompanyDto {
 	public void setDateLastUpdated(Date dateLastUpdated) {
 		this.dateLastUpdated = dateLastUpdated;
 	}
-	public Long getFactionId() {
-		return factionId;
-	}
-	public void setFactionId(Long factionId) {
-		this.factionId = factionId;
+
+	public BigInteger getHitpoints() {
+		return hitpoints;
 	}
 
-	public Long getLeadHeroId() {
-		return leadHeroId;
+	public void setHitpoints(BigInteger hitpoints) {
+		this.hitpoints = hitpoints;
 	}
 
-	public void setLeadHeroId(Long leadHeroId) {
-		this.leadHeroId = leadHeroId;
+	public BigInteger getExperience() {
+		return experience;
 	}
 
-	public List<CreatureInCompanyDto> getCreaturesInCompany() {
-		return creaturesInCompany;
+	public void setExperience(BigInteger experience) {
+		this.experience = experience;
 	}
 
-	public void setCreaturesInCompany(List<CreatureInCompanyDto> creaturesInCompany) {
-		this.creaturesInCompany = creaturesInCompany;
+	public Long getOriginId() {
+		return originId;
 	}
 
-	public List<HeroInCompanyDto> getHeroesInCompany() {
-		return heroesInCompany;
-	}
-
-	public void setHeroesInCompany(List<HeroInCompanyDto> heroesInCompany) {
-		this.heroesInCompany = heroesInCompany;
+	public void setOriginId(Long originId) {
+		this.originId = originId;
 	}
 }

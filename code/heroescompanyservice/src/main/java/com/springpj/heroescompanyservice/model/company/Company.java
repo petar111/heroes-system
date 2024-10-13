@@ -39,6 +39,9 @@ public class Company {
 
 	@Column(name = "FACTION_ID")
 	private Long factionId;
+
+	@Column(name = "LEAD_HERO_ID")
+	private Long leadHeroId;
 	
 	
 	public Long getId() {
@@ -77,5 +80,12 @@ public class Company {
 	public void setFactionId(Long factionId) {
 		this.factionId = factionId;
 	}
-	
+
+	public Long getLeadHeroId() {
+		return leadHeroId;
+	}
+
+	public void setLeadHeroId(Long leadHeroId) {
+		this.leadHeroId = leadHeroId;
+	}
 }

@@ -1,6 +1,7 @@
 package com.springpj.heroescompanyservice.controller;
 
 import com.springpj.heroescompanyservice.messaging.kafka.KafkaFactionServiceHandler;
+import com.springpj.heroescompanyservice.model.dto.HeroDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,12 @@ public class CompanyController {
 		
 		return companyModel;
 		
+	}
+
+	@GetMapping("{id}/lead-hero")
+	public HeroDto findLeadHeroById(@PathVariable Long id) {
+		return companyService.findLeadHeroByCompanyId(id);
+
 	}
 
 	@PostMapping("add")

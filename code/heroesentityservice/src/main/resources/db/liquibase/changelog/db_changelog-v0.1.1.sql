@@ -34,3 +34,17 @@ ON DELETE CASCADE;
 
 --changeset petar:3
 alter table entity_definition add column origin_id bigint;
+
+--changeset petar:4
+create table _level(
+    id bigserial not null,
+    number bigint not null,
+    experience_lower bigint,
+    experience_upper bigint,
+    primary key (id)
+);
+
+alter table hero add column level_id bigint;
+
+alter table hero add constraint FK_LEVEL_1
+foreign key (level_id) references _level (id);

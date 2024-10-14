@@ -42,6 +42,7 @@ public class SecurityConfiguration {
         http.csrf(ServerHttpSecurity.CsrfSpec::disable)
         		.authorizeExchange(e -> e
         				.pathMatchers("/heroes-authorization-server/auth/**").permitAll()
+                        .pathMatchers("/actuator/**").permitAll()
         				.anyExchange().authenticated())
                 .authenticationManager(authenticationManager())
                 .addFilterBefore(

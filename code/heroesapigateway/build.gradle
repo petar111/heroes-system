@@ -33,9 +33,11 @@ dependencies {
 	implementation 'io.micrometer:micrometer-observation'
 	implementation 'io.micrometer:micrometer-tracing-bridge-otel'
 	implementation 'io.github.openfeign:feign-micrometer'
-	
-	
-	
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+
+
 	implementation 'com.auth0:java-jwt:4.4.0'
 	
 	implementation 'org.apache.commons:commons-lang3:3.13.0'

@@ -1,39 +1,102 @@
 services:
+  
+  zipkin-server:
+    image: openzipkin/zipkin:2.23
+    mem_limit: 300m
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider zipkin-server:9411/health || exit 1
+      interval: 10s
+      timeout: 15s
+      retries: 3
+    ports:
+      - "9411:9411"
+    networks:
+      - heroes-system-network
 
-  zookeeper-1:
+  db:
+    image: postgres:14-alpine
+    restart: always
+    ports:
+      - 5450:5432
+    secrets:
+      - db-password
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "db", "-p", "5432"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: heroesoriginservicedb,heroesuserservicedb,heroesfactionservicedb,heroescompanyservicedb,heroesbattletypeservice,heroesentityservicedb,heroesspellservicedb
+      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+      POSTGRES_USER: postgres
+      PGUSER: postgres
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - heroes-system-network
+    expose:
+      - "5432"
+  
+  zookeeper:
     image: confluentinc/cp-zookeeper:7.4.4
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    healthcheck:
+      test: ["CMD-SHELL", "echo ruok | nc -w 2 zookeeper 2181"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
     ports:
       - 2181:2181
     networks:
       - heroes-system-network
   
-  kafka-1:
+  kafka:
     image: confluentinc/cp-kafka:7.4.4
-    depends_on:
-      - zookeeper-1
+    healthcheck:
+      test: kafka-topics --bootstrap-server kafka:29092 --list
+      interval: 10s
+      timeout: 15s
+      retries: 5
     ports:
       - 29092:29092
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:29092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      zookeeper:
+        condition: service_healthy
     networks:
       - heroes-system-network
   
   config-server:
     build:
       context: ../code/heroesconfigserver
+      target: final-app
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider config-server:8888/actuator/health || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
     mem_limit: 700m
     environment:
       CONFIG_FILE_URI: file:/config/local-repo
     ports:
       - "8888:8888"
+    depends_on:
+      kafka:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      zipkin-server:
+        condition: service_healthy
     networks:
       - heroes-system-network
   
@@ -41,6 +104,12 @@ services:
     build:
       context: ../code/heroesnamingserver
     mem_limit: 700m
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider naming-server:8761/actuator/health || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
     ports:
@@ -48,23 +117,30 @@ services:
     networks:
       - heroes-system-network
     depends_on:
-      - config-server
+      config-server:
+        condition: service_healthy
       
   api-gateway:
     build:
       context: ../code/heroesapigateway
     mem_limit: 700m
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider api-gateway:8765/actuator/health || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
     ports:
       - "8765:8765"
-    networks:
-      - heroes-system-network
-    depends_on:
-      - naming-server
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
       CONFIG_SERVER_URL: http://config-server:8888/
-      
+    depends_on:
+      naming-server:
+        condition: service_healthy
+    networks:
+      - heroes-system-network
 
   heroes-origin-service:
     build:
@@ -85,9 +161,8 @@ services:
     networks:
       - heroes-system-network
     depends_on:
-      - naming-server
-      - api-gateway
-      - db
+      api-gateway:
+        condition: service_healthy
       
   heroes-faction-service:
     build:
@@ -108,9 +183,8 @@ services:
     networks:
       - heroes-system-network
     depends_on:
-      - naming-server
-      - api-gateway
-      - db
+      api-gateway:
+        condition: service_healthy
       
   heroes-battletype-service:
     build:
@@ -131,9 +205,8 @@ services:
     networks:
       - heroes-system-network
     depends_on:
-      - naming-server
-      - api-gateway
-      - db
+      api-gateway:
+        condition: service_healthy
       
   heroes-entity-service:
     build:
@@ -154,9 +227,30 @@ services:
     networks:
       - heroes-system-network
     depends_on:
-      - naming-server
-      - api-gateway
-      - db
+      api-gateway:
+        condition: service_healthy
+      
+  heroes-spell-service:
+    build:
+      context: ../code/heroesspellservice
+    ports:
+      - 8003:8003
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/heroesspellservicedb
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      SERVICE_PORT: 8080
+      HIBERNATE_DDL_AUTO: none
+      LIQUIBASE_ENABLE: true
+      HIBERNATE_SHOW_SQL: false
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      CONFIG_SERVER_URL: http://config-server:8888/
+    networks:
+      - heroes-system-network
+    depends_on:
+      api-gateway:
+        condition: service_healthy
 
   heroes-company-service:
     build:
@@ -177,9 +271,8 @@ services:
     networks:
       - heroes-system-network
     depends_on:
-      - naming-server
-      - api-gateway
-      - db
+      api-gateway:
+        condition: service_healthy
 
   heroes-user-service:
     build:
@@ -200,9 +293,8 @@ services:
     networks:
       - heroes-system-network
     depends_on:
-      - naming-server
-      - api-gateway
-      - db
+      api-gateway:
+        condition: service_healthy
 
   heroes-authorization-server:
     build:
@@ -219,35 +311,8 @@ services:
     networks:
       - heroes-system-network
     depends_on:
-      - naming-server
-      - api-gateway
-      - heroes-user-service
-  
-  zipkin-server:
-    image: openzipkin/zipkin:2.23
-    mem_limit: 300m
-    ports:
-      - "9411:9411"
-    networks:
-      - heroes-system-network
-
-  db:
-    image: postgres:14-alpine
-    restart: always
-    ports:
-      - 5450:5432
-    secrets:
-      - db-password
-    volumes:
-      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
-      - db-data:/var/lib/postgresql/data
-    networks:
-      - heroes-system-network
-    environment:
-      POSTGRES_MULTIPLE_DATABASES: heroesoriginservicedb,heroesuserservicedb,heroesfactionservicedb,heroescompanyservicedb,heroesbattletypeservice,heroesentityservicedb
-      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-    expose:
-      - "5432"
+      api-gateway:
+        condition: service_healthy
 
 volumes:
   db-data:

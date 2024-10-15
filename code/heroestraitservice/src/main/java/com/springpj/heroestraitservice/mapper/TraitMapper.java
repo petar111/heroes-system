@@ -1,6 +1,6 @@
 package com.springpj.heroestraitservice.mapper;
 import com.springpj.heroestraitservice.model.trait.Trait;
-import com.springpj.heroestraitservice.model.dto.TraitDto;
+import com.springpj.heroestraitservice.model.trait.TraitDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;

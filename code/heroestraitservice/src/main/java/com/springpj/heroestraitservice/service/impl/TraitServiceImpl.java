@@ -3,7 +3,7 @@ package com.springpj.heroestraitservice.service.impl;
 import com.springpj.heroestraitservice.errorhandler.exception.TraitNotFoundByIdException;
 import com.springpj.heroestraitservice.mapper.TraitMapper;
 import com.springpj.heroestraitservice.model.trait.Trait;
-import com.springpj.heroestraitservice.model.dto.TraitDto;
+import com.springpj.heroestraitservice.model.trait.TraitDto;
 import com.springpj.heroestraitservice.repository.TraitRepository;
 import com.springpj.heroestraitservice.service.TraitService;
 
@@ -11,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service

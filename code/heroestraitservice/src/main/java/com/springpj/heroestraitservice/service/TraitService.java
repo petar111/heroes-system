@@ -1,8 +1,6 @@
 package com.springpj.heroestraitservice.service;
 
-import com.springpj.heroestraitservice.model.dto.TraitDto;
-
-import java.util.List;
+import com.springpj.heroestraitservice.model.trait.TraitDto;
 
 public interface TraitService {
 	

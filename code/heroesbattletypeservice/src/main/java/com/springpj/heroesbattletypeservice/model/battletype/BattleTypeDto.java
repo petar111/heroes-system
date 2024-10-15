@@ -1,4 +1,4 @@
-package com.springpj.heroesbattletypeservice.model.dto;
+package com.springpj.heroesbattletypeservice.model.battletype;
 
 import java.util.Date;
 

@@ -1,7 +1,7 @@
 package com.springpj.heroesbattletypeservice.controller;
 
-import com.springpj.heroesbattletypeservice.model.dto.BattleCapacityDto;
-import com.springpj.heroesbattletypeservice.model.dto.BattleTypeDto;
+import com.springpj.heroesbattletypeservice.model.battlecapacity.BattleCapacityDto;
+import com.springpj.heroesbattletypeservice.model.battletype.BattleTypeDto;
 import com.springpj.heroesbattletypeservice.service.BattleTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

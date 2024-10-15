@@ -1,6 +1,6 @@
 package com.springpj.heroesentityservice.mapper;
 import com.springpj.heroesentityservice.model.entity.EntityDefinition;
-import com.springpj.heroesentityservice.model.dto.EntityDefinitionDto;
+import com.springpj.heroesentityservice.model.entity.EntityDefinitionDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;

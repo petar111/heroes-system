@@ -1,8 +1,10 @@
-package com.springpj.heroesentityservice.model.dto;
+package com.springpj.heroesentityservice.model.entity;
+
+import com.springpj.heroesentityservice.model.level.LevelDto;
 
 import java.math.BigInteger;
 
-public class HeroDto extends EntityDefinitionDto{
+public class HeroDto extends EntityDefinitionDto {
     private BigInteger experience;
 
     private LevelDto level;

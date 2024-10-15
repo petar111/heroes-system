@@ -1,7 +1,7 @@
 package com.springpj.heroesbattletypeservice.service;
 
-import com.springpj.heroesbattletypeservice.model.dto.BattleCapacityDto;
-import com.springpj.heroesbattletypeservice.model.dto.BattleTypeDto;
+import com.springpj.heroesbattletypeservice.model.battlecapacity.BattleCapacityDto;
+import com.springpj.heroesbattletypeservice.model.battletype.BattleTypeDto;
 
 import java.util.List;
 

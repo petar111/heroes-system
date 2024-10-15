@@ -1,4 +1,4 @@
-package com.springpj.heroesentityservice.model.dto;
+package com.springpj.heroesentityservice.model.level;
 
 import jakarta.persistence.*;
 

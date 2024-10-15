@@ -1,6 +1,6 @@
 package com.springpj.heroesbattletypeservice.mapper;
 import com.springpj.heroesbattletypeservice.model.battletype.BattleType;
-import com.springpj.heroesbattletypeservice.model.dto.BattleTypeDto;
+import com.springpj.heroesbattletypeservice.model.battletype.BattleTypeDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;

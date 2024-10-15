@@ -7,11 +7,11 @@ import com.springpj.heroesentityservice.errorhandler.exception.HeroNotFoundByIdE
 import com.springpj.heroesentityservice.mapper.CreatureMapper;
 import com.springpj.heroesentityservice.mapper.EntityDefinitionMapper;
 import com.springpj.heroesentityservice.mapper.HeroMapper;
-import com.springpj.heroesentityservice.model.dto.CreatureDto;
-import com.springpj.heroesentityservice.model.dto.HeroDto;
+import com.springpj.heroesentityservice.model.entity.CreatureDto;
+import com.springpj.heroesentityservice.model.entity.HeroDto;
 import com.springpj.heroesentityservice.model.entity.Creature;
 import com.springpj.heroesentityservice.model.entity.EntityDefinition;
-import com.springpj.heroesentityservice.model.dto.EntityDefinitionDto;
+import com.springpj.heroesentityservice.model.entity.EntityDefinitionDto;
 import com.springpj.heroesentityservice.model.entity.Hero;
 import com.springpj.heroesentityservice.repository.CreatureRepository;
 import com.springpj.heroesentityservice.repository.EntityDefinitionRepository;

@@ -1,7 +1,7 @@
 package com.springpj.heroesentityservice.client;
 
 
-import com.springpj.heroesentityservice.model.dto.BattleCapacityDto;
+import com.springpj.heroesentityservice.model.battlecapacity.BattleCapacityDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;

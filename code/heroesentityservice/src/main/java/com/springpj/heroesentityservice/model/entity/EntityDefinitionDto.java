@@ -1,9 +1,10 @@
-package com.springpj.heroesentityservice.model.dto;
+package com.springpj.heroesentityservice.model.entity;
 
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
+import com.springpj.heroesentityservice.model.battlecapacity.BattleCapacityDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

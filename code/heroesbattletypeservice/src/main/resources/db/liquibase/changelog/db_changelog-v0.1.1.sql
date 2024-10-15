@@ -23,3 +23,23 @@ create table battle_capacity(
 alter table battle_capacity add constraint FK_BATTLE_TYPE_1
 foreign key (battle_type_id) references battle_type (id);
 
+
+--changeset petar:3
+alter table battle_capacity add column attack_min bigint;
+alter table battle_capacity add column attack_max bigint;
+alter table battle_capacity add column defence_min bigint;
+alter table battle_capacity add column defence_max bigint;
+
+update battle_capacity set attack_min = attack;
+update battle_capacity set attack_max = attack;
+
+update battle_capacity set defence_min = defence;
+update battle_capacity set defence_max = defence;
+
+alter table battle_capacity alter column attack_min set not null;
+alter table battle_capacity alter column attack_max set not null;
+alter table battle_capacity alter column defence_min set not null;
+alter table battle_capacity alter column defence_max set not null;
+
+alter table battle_capacity drop column attack;
+alter table battle_capacity drop column defence;

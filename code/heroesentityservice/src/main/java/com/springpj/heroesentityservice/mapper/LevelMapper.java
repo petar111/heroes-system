@@ -1,6 +1,6 @@
 package com.springpj.heroesentityservice.mapper;
 
-import com.springpj.heroesentityservice.model.dto.LevelDto;
+import com.springpj.heroesentityservice.model.level.LevelDto;
 import com.springpj.heroesentityservice.model.level.Level;
 import org.mapstruct.Mapper;
 

@@ -1,6 +1,6 @@
 package com.springpj.heroesentityservice.mapper;
 
-import com.springpj.heroesentityservice.model.dto.CreatureDto;
+import com.springpj.heroesentityservice.model.entity.CreatureDto;
 import com.springpj.heroesentityservice.model.entity.Creature;
 import org.mapstruct.Mapper;
 

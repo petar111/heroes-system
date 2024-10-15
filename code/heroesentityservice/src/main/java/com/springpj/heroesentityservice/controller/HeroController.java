@@ -1,6 +1,6 @@
 package com.springpj.heroesentityservice.controller;
 
-import com.springpj.heroesentityservice.model.dto.HeroDto;
+import com.springpj.heroesentityservice.model.entity.HeroDto;
 import com.springpj.heroesentityservice.service.EntityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

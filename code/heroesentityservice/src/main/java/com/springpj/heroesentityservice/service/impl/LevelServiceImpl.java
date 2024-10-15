@@ -2,7 +2,7 @@ package com.springpj.heroesentityservice.service.impl;
 
 import com.springpj.heroesentityservice.errorhandler.exception.LevelNotFoundByIdException;
 import com.springpj.heroesentityservice.mapper.LevelMapper;
-import com.springpj.heroesentityservice.model.dto.LevelDto;
+import com.springpj.heroesentityservice.model.level.LevelDto;
 import com.springpj.heroesentityservice.repository.LevelRepository;
 import com.springpj.heroesentityservice.service.LevelService;
 import org.slf4j.Logger;

@@ -4,10 +4,7 @@ import com.springpj.heroessimulationservice.model.simulation.battle.BattleSimula
 import com.springpj.heroessimulationservice.model.simulation.battle.SimpleBattleSimulationRequestDto;
 import com.springpj.heroessimulationservice.model.simulation.battle.SimpleBattleSimulationResponseDto;
 import com.springpj.heroessimulationservice.service.SimulationService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -23,5 +20,10 @@ public class SimulationController {
     @PostMapping("simple-battle")
     private Mono<BattleSimulationResponseDto> handleSimpleBattle(@RequestBody SimpleBattleSimulationRequestDto request){
         return simulationService.handleSimpleBattle(request);
+    }
+
+    @GetMapping("test")
+    private Mono<String> test(){
+        return Mono.just("Test SUCCESS.");
     }
 }

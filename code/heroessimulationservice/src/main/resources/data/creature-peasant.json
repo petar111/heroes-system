@@ -1,0 +1,26 @@
+{
+  "id":1,
+  "name":"Peasant",
+  "hitpoints":30,
+  "battleCapacities":[
+    {
+      "id":3,
+      "battleTypeId":1,
+      "attackMin":12,
+      "attackMax":15,
+      "defenceMin":10,
+      "defenceMax":20,
+      "entitiyId":1
+
+    },
+    {
+      "id":4,
+      "battleTypeId":1,
+      "attackMin":0,
+      "attackMax":0,
+      "defenceMin":15,
+      "defenceMax":20,
+      "entitiyId":2
+    }
+  ]
+}

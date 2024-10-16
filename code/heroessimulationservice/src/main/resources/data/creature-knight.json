@@ -1,0 +1,26 @@
+{
+  "id":1,
+  "name":"Knight",
+  "hitpoints":80,
+  "battleCapacities":[
+    {
+      "id":1,
+      "battleTypeId":1,
+      "attackMin":20,
+      "attackMax":27,
+      "defenceMin":30,
+      "defenceMax":32,
+      "entitiyId":1
+
+    },
+    {
+      "id":2,
+      "battleTypeId":2,
+      "attackMin":0,
+      "attackMax":0,
+      "defenceMin":40,
+      "defenceMax":50,
+      "entitiyId":2
+    }
+  ]
+}

@@ -19,12 +19,10 @@ public class SimulationServiceImpl implements SimulationService {
     private final BattleTypeClientProxy battleTypeClientProxy;
     private final EntityClientProxy entityClientProxy;
 
-    private final BattleStrategy battleSimulation;
 
-    public SimulationServiceImpl(BattleTypeClientProxy battleTypeClientProxy, EntityClientProxy entityClientProxy, BattleStrategy battleSimulation) {
+    public SimulationServiceImpl(BattleTypeClientProxy battleTypeClientProxy, EntityClientProxy entityClientProxy) {
         this.battleTypeClientProxy = battleTypeClientProxy;
         this.entityClientProxy = entityClientProxy;
-        this.battleSimulation = battleSimulation;
     }
 
     @Override

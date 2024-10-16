@@ -1,5 +1,3 @@
-import org.gradle.jvm.toolchain.JavaLanguageVersion
-
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.4'
@@ -27,40 +25,24 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 
 	implementation 'org.springframework.cloud:spring-cloud-config-client'
 
-
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 	implementation 'io.opentelemetry:opentelemetry-exporter-zipkin'
 	implementation 'io.micrometer:micrometer-observation'
 	implementation 'io.micrometer:micrometer-tracing-bridge-otel'
-	implementation 'io.github.openfeign:feign-micrometer'
 
 	implementation 'com.playtika.reactivefeign:feign-reactor-core:4.2.1'
 	implementation 'com.playtika.reactivefeign:feign-reactor-spring-configuration:4.2.1'
 	implementation 'com.playtika.reactivefeign:feign-reactor-webclient:4.2.1'
 
-
-	implementation 'com.h2database:h2'
-	implementation 'org.postgresql:postgresql'
-	implementation 'org.liquibase:liquibase-core'
-
 	implementation 'org.springframework.kafka:spring-kafka'
 
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
-
-
-
-
 
 
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
@@ -68,8 +50,10 @@ dependencies {
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
 	implementation 'org.apache.commons:commons-lang3:3.13.0'
+	implementation 'com.google.code.gson:gson:2.11.0'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test:3.6.11'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

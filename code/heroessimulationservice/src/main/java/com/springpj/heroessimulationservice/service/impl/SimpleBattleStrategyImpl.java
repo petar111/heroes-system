@@ -24,17 +24,20 @@ public class SimpleBattleStrategyImpl implements BattleStrategy {
 
         Random random = new Random();
 
+        StringBuilder log = new StringBuilder("");
+
         Combatant combatant1 = new Combatant();
         combatant1.setEntity(request.getEntity1());
         combatant1.setHitpoints(request.getEntity1().getHitpoints().longValue());
-        combatant1.setAttackingCapacity(request.getEntity1().getBattleCapacities().stream().filter(c -> c.getId().equals(request.getBattleTypeIdForEntity1()))
+        combatant1.setAttackingCapacity(request.getEntity1().getBattleCapacities().stream().filter(c -> c.getBattleTypeId().equals(request.getBattleTypeIdForEntity1()))
                 .findAny().orElseThrow(() -> new RuntimeException("FATAL: Battle type for entity1 with id not found: " + request.getBattleTypeIdForEntity1())));
 
         Combatant combatant2 = new Combatant();
         combatant2.setEntity(request.getEntity2());
         combatant2.setHitpoints(request.getEntity2().getHitpoints().longValue());
-        combatant2.setAttackingCapacity(request.getEntity2().getBattleCapacities().stream().filter(c -> c.getId().equals(request.getBattleTypeIdForEntity2()))
+        combatant2.setAttackingCapacity(request.getEntity2().getBattleCapacities().stream().filter(c -> c.getBattleTypeId().equals(request.getBattleTypeIdForEntity2()))
                 .findAny().orElseThrow(() -> new RuntimeException("FATAL: Battle type for entity2 with id not found: " + request.getBattleTypeIdForEntity2())));
+
 
         List<Combatant> opponents = new java.util.ArrayList<>(List.of(combatant1, combatant2));
 
@@ -43,15 +46,15 @@ public class SimpleBattleStrategyImpl implements BattleStrategy {
         Combatant firstCombatant = opponents.get(0);
         Combatant secondCombatant = opponents.get(1);
 
-        StringBuilder log = new StringBuilder("");
+
         log.append(String.format("============ Starting battle between %s and %s ================\n",firstCombatant.getEntity().getName(), secondCombatant.getEntity().getName()));
-        log.append(String.format("First combatant: %s",firstCombatant.getEntity().getName()));
-        log.append(String.format("Second combatant: %s",secondCombatant.getEntity().getName()));
+        log.append(String.format("First combatant: %s\n",firstCombatant.getEntity().getName()));
+        log.append(String.format("Second combatant: %s\n",secondCombatant.getEntity().getName()));
 
 
         boolean firstCombatantTurn = true;
         int turnNumber = 1;
-        while(firstCombatant.getHitpoints() > 0 && secondCombatant.getHitpoints() > 0){
+        while(firstCombatant.getHitpoints() > 0 && secondCombatant.getHitpoints() > 0 && turnNumber <= 1000){
 
             Combatant attacker = firstCombatantTurn ? firstCombatant : secondCombatant;
             Combatant defender = firstCombatantTurn ? secondCombatant : firstCombatant;
@@ -72,11 +75,13 @@ public class SimpleBattleStrategyImpl implements BattleStrategy {
             log.append(String.format("Evaluated attack: %s\n", attackPower));
             log.append(String.format("Evaluated defend: %s\n", defencePower));
 
-            if(attackPower - defencePower > 0){
-                long diffenence = attackPower - defencePower;
-                log.append(String.format("Attacker deals %s damage\n", diffenence));
-                defender.setHitpoints(defender.getHitpoints() - diffenence);
-            }
+            long difference = Math.max(attackPower - defencePower, 1);
+
+            log.append(String.format("Attacker deals %s damage\n", difference));
+            defender.setHitpoints(defender.getHitpoints() - difference);
+
+            log.append(String.format("Attacker %s - remaining hitpoints %s\n", attacker.getEntity().getName(), attacker.getHitpoints()));
+            log.append(String.format("Defender %s - remaining hitpoints %s\n", defender.getEntity().getName(), defender.getHitpoints()));
 
             log.append(String.format("Turn number: %s - END\n", turnNumber));
 
@@ -85,11 +90,14 @@ public class SimpleBattleStrategyImpl implements BattleStrategy {
         }
 
 
-        Combatant winner = firstCombatant.getHitpoints() > 0 ? firstCombatant : secondCombatant;
-        Combatant loser = firstCombatant.getHitpoints() > 0 ? secondCombatant : firstCombatant;
 
-        log.append(String.format("Battle finished. Winner: %s, Loser: %s\n", winner.getEntity().getName(), loser.getEntity().getName()));
+        Combatant winner = firstCombatant.getHitpoints() > secondCombatant.getHitpoints() ? firstCombatant : secondCombatant;
+        Combatant loser = firstCombatant.getHitpoints() <= secondCombatant.getHitpoints() ? firstCombatant : secondCombatant;
+
+        log.append("Battle finished.\n");
+        log.append(String.format("Winner: %s, Loser: %s\n", winner.getEntity().getName(), loser.getEntity().getName()));
         log.append(String.format("Winner remaining hitpoints %s\n", winner.getHitpoints()));
+        log.append(String.format("Loser remaining hitpoints %s\n", loser.getHitpoints()));
 
         log.append("===============================================================================");
 

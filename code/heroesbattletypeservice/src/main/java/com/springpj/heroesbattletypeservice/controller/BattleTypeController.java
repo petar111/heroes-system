@@ -60,4 +60,8 @@ public class BattleTypeController {
 		return battleTypeService.bulkAddCapacities(battleCapacities);
 	}
 
+	@GetMapping("/capacity/entity/{id}")
+	List<BattleCapacityDto> getCapacitiesByEntityId(@PathVariable Long id){
+		return battleTypeService.findAllCapacitiesByEntityId(id);
+	}
 }

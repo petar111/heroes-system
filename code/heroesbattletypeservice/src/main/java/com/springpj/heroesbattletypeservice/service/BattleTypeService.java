@@ -12,4 +12,6 @@ public interface BattleTypeService {
 	BattleTypeDto findById(Long id);
 
     List<BattleCapacityDto> bulkAddCapacities(List<BattleCapacityDto> battleCapacities);
+
+	List<BattleCapacityDto> findAllCapacitiesByEntityId(Long id);
 }

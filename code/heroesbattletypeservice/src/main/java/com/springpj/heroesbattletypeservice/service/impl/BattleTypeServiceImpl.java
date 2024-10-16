@@ -67,5 +67,10 @@ public class BattleTypeServiceImpl implements BattleTypeService {
 		return battleCapacityMapper.toDtoList(savedBattleCapacities);
 	}
 
+	@Override
+	public List<BattleCapacityDto> findAllCapacitiesByEntityId(Long id) {
+		return battleCapacityMapper.toDtoList(battleCapacityRepository.findAllByEntityId(id));
+	}
+
 
 }

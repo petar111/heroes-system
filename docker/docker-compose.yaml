@@ -31,7 +31,7 @@ services:
       POSTGRES_USER: postgres
       PGUSER: postgres
     volumes:
-      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sh
       - db-data:/var/lib/postgresql/data
     networks:
       - heroes-system-network
@@ -233,7 +233,7 @@ services:
     build:
       context: ../code/heroesspellservice
     ports:
-      - 8003:8003
+      - 8097:8097
     environment:
       DATABASE_URL: jdbc:postgresql://db:5432/heroesspellservicedb
       DATABASE_USERNAME: postgres

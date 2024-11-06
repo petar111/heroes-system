@@ -1,0 +1,18 @@
+services:
+  stats-producer:
+    build: ../../code/sample/heroesstatsmanagerservice
+    ports:
+      - "5000:5000"
+    networks:
+      - network-1
+      
+  reactive-java:
+    build: ../../code/sample/reactivejava
+    ports:
+      - "8081:8081"
+    networks:
+      - network-1
+      
+networks:
+  network-1:
+

@@ -1,16 +1,15 @@
-FROM openjdk:18-jdk-alpine3.14 as final-app
+# Use a base Alpine image
+FROM gradle:jdk21-alpine
 
 USER 0
 
 WORKDIR /app
 
-COPY . .
-
-RUN ./gradlew dependencies
-RUN ./gradlew clean
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
 
 RUN mkdir -p /config/local-repo
 
 COPY /config-git /config/local-repo
 
-CMD ["./gradlew", "bootRun"]
+ENTRYPOINT ["java","-jar","/app/app.jar"]

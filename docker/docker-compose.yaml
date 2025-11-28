@@ -31,7 +31,7 @@ services:
       POSTGRES_USER: postgres
       PGUSER: postgres
     volumes:
-      - ./db.sql:/docker-entrypoint-initdb.d/db.sh
+      - ./db/sql:/docker-entrypoint-initdb.d/
       - db-data:/var/lib/postgresql/data
     networks:
       - heroes-system-network

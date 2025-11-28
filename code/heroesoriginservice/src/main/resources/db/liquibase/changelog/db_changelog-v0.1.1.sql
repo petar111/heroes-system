@@ -29,9 +29,5 @@ alter table if exists origin_version
  --changeset petar:3
  alter table origin_version drop column version;
 
---changeset petar:6.1
-alter table origin_version drop constraint created_by_fk;
-alter table origin_version drop column created_by_id;
-
 --changeset petar:6.2
 alter table origin_version add column created_by_id bigint;

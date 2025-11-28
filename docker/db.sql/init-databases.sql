@@ -1,0 +1,8 @@
+CREATE DATABASE heroesoriginservicedb;
+CREATE DATABASE heroesuserservicedb;
+CREATE DATABASE heroesfactionservicedb;
+CREATE DATABASE heroescompanyservicedb;
+CREATE DATABASE heroesbattletypeservice;
+CREATE DATABASE heroesentityservicedb;
+CREATE DATABASE heroesspellservicedb;
+CREATE DATABASE heroestraitservicedb;

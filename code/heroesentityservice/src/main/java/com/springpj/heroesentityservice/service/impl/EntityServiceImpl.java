@@ -69,7 +69,11 @@ public class EntityServiceImpl implements EntityService {
 	public EntityDefinitionDto findById(Long id) {
 		EntityDefinition entityDefinition = entityDefinitionRepository.findById(id)
 				.orElseThrow(() -> new EntityDefinitionNotFoundByIdException(id));
-		return entityDefinitionMapper.toDto(entityDefinition);
+
+
+        EntityDefinitionDto dto = entityDefinitionMapper.toDto(entityDefinition);
+        dto.setBattleCapacities(battleTypeClientProxy.findCapacitiesByEntityId(id));
+		return dto;
 	}
 
 	@Override

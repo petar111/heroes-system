@@ -4,6 +4,8 @@ package com.springpj.heroesentityservice.client;
 import com.springpj.heroesentityservice.model.battlecapacity.BattleCapacityDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,5 +16,8 @@ import java.util.List;
 public interface BattleTypeClientProxy {
 	@PostMapping("/battle-type/capacity/bulkAdd")
 	List<BattleCapacityDto> bulkAddCapacities(@RequestBody List<BattleCapacityDto> battleCapacities);
+
+    @GetMapping("/battle-type/capacity/entity/{id}")
+    List<BattleCapacityDto> findCapacitiesByEntityId(@PathVariable Long id);
 
 }

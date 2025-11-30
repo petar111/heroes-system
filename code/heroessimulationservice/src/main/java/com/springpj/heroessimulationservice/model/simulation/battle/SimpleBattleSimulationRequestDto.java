@@ -3,41 +3,22 @@ package com.springpj.heroessimulationservice.model.simulation.battle;
 import com.springpj.heroessimulationservice.model.entity.EntityDefinitionDto;
 
 public class SimpleBattleSimulationRequestDto extends BattleSimulationRequestDto {
-    private EntityDefinitionDto entity1;
-    private EntityDefinitionDto entity2;
+    private Long entity1Id;
+    private Long entity2Id;
 
-    private Long battleTypeIdForEntity1;
-    private Long battleTypeIdForEntity2;
-
-    public EntityDefinitionDto getEntity1() {
-        return entity1;
+    public Long getEntity1Id() {
+        return entity1Id;
     }
 
-    public void setEntity1(EntityDefinitionDto entity1) {
-        this.entity1 = entity1;
+    public void setEntity1Id(Long entity1Id) {
+        this.entity1Id = entity1Id;
     }
 
-    public EntityDefinitionDto getEntity2() {
-        return entity2;
+    public Long getEntity2Id() {
+        return entity2Id;
     }
 
-    public void setEntity2(EntityDefinitionDto entity2) {
-        this.entity2 = entity2;
-    }
-
-    public Long getBattleTypeIdForEntity1() {
-        return battleTypeIdForEntity1;
-    }
-
-    public void setBattleTypeIdForEntity1(Long battleTypeIdForEntity1) {
-        this.battleTypeIdForEntity1 = battleTypeIdForEntity1;
-    }
-
-    public Long getBattleTypeIdForEntity2() {
-        return battleTypeIdForEntity2;
-    }
-
-    public void setBattleTypeIdForEntity2(Long battleTypeIdForEntity2) {
-        this.battleTypeIdForEntity2 = battleTypeIdForEntity2;
+    public void setEntity2Id(Long entity2Id) {
+        this.entity2Id = entity2Id;
     }
 }

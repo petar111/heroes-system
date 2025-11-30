@@ -26,7 +26,6 @@ services:
       timeout: 10s
       retries: 5
     environment:
-      POSTGRES_MULTIPLE_DATABASES: heroesoriginservicedb,heroesuserservicedb,heroesfactionservicedb,heroescompanyservicedb,heroesbattletypeservice,heroesentityservicedb,heroesspellservicedb,heroestraitservicedb
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
       POSTGRES_USER: postgres
       PGUSER: postgres
@@ -283,6 +282,28 @@ services:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: root
       SERVICE_PORT: 8071
+      HIBERNATE_DDL_AUTO: none
+      LIQUIBASE_ENABLE: true
+      HIBERNATE_SHOW_SQL: false
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411/
+      CONFIG_SERVER_URL: http://config-server:8888/
+    networks:
+      - heroes-system-network
+    depends_on:
+      api-gateway:
+        condition: service_healthy
+
+  heroes-simulation-service:
+    build:
+      context: ../code/heroessimulationservice
+    ports:
+      - 8077:8077
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/heroessimulationservicedb
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      SERVICE_PORT: 8077
       HIBERNATE_DDL_AUTO: none
       LIQUIBASE_ENABLE: true
       HIBERNATE_SHOW_SQL: false

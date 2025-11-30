@@ -1,5 +1,8 @@
 package com.springpj.heroessimulationservice.client;
 
+import com.springpj.heroessimulationservice.model.entity.CreatureDto;
+import com.springpj.heroessimulationservice.model.entity.EntityDefinitionDto;
+import com.springpj.heroessimulationservice.model.entity.HeroDto;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +14,13 @@ import reactor.core.publisher.Mono;
 public interface EntityClientProxy {
 
 	@GetMapping("/hero/{id}")
-	Mono<Void> findHeroById(@PathVariable Long id);
+	Mono<HeroDto> findHeroById(@PathVariable Long id);
 
 	@GetMapping("/creature/{id}")
-	Mono<Void> findCreatureById(@PathVariable Long id);
+	Mono<CreatureDto> findCreatureById(@PathVariable Long id);
+
+    @GetMapping("/entity/{id}")
+    Mono<EntityDefinitionDto> findEntityById(@PathVariable Long id);
 
 	
 }

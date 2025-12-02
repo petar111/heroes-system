@@ -14,7 +14,7 @@ public class EntityDefinitionDto {
 	@Size(max = 255, message = "Maximum name size is 255.")
 	@NotBlank(message = "Name must not be blank.")
 	private String name;
-	@Size(max = 255, message = "Maximum description size is 255.")
+	@Size(max = 5000, message = "Maximum description size is 5000.")
 	private String description;
 	private Date dateCreated;
 	private Date dateLastUpdated;

@@ -7,6 +7,7 @@ import com.springpj.heroesentityservice.errorhandler.exception.HeroNotFoundByIdE
 import com.springpj.heroesentityservice.mapper.CreatureMapper;
 import com.springpj.heroesentityservice.mapper.EntityDefinitionMapper;
 import com.springpj.heroesentityservice.mapper.HeroMapper;
+import com.springpj.heroesentityservice.model.battlecapacity.BattleCapacityDto;
 import com.springpj.heroesentityservice.model.entity.CreatureDto;
 import com.springpj.heroesentityservice.model.entity.HeroDto;
 import com.springpj.heroesentityservice.model.entity.Creature;
@@ -22,6 +23,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -65,7 +72,24 @@ public class EntityServiceImpl implements EntityService {
 		return entityDefinitionDto;
 	}
 
-	@Override
+    @Override
+    public List<EntityDefinitionDto> saveAll(List<EntityDefinitionDto> dtos) {
+        log.info("Saving entityDefinitions  - START");
+        Map<String, List<BattleCapacityDto>> battleCapacitiesMap = dtos.stream().collect(Collectors.toMap(EntityDefinitionDto::getName, EntityDefinitionDto::getBattleCapacities));
+        List<EntityDefinition> entities = entityDefinitionRepository.saveAll(entityDefinitionMapper.toEntityList(dtos));
+        entities.forEach(e -> battleCapacitiesMap.get(e.getName()).forEach(bc -> bc.setEntityId(e.getId())));
+        saveBattleCapacities(battleCapacitiesMap.values().stream().flatMap(Collection::stream).toList());
+        log.info("Saving entityDefinitions - DONE");
+
+
+        return entityDefinitionMapper.toDtoList(entities);
+    }
+
+    private void saveBattleCapacities(List<BattleCapacityDto> list) {
+        battleTypeClientProxy.bulkAddCapacities(list);
+    }
+
+    @Override
 	public EntityDefinitionDto findById(Long id) {
 		EntityDefinition entityDefinition = entityDefinitionRepository.findById(id)
 				.orElseThrow(() -> new EntityDefinitionNotFoundByIdException(id));
@@ -114,7 +138,7 @@ public class EntityServiceImpl implements EntityService {
 		return creatureDto;
 	}
 
-	private void addEntityBattleCapacities(EntityDefinition savedEntity, EntityDefinitionDto dto){
+    private void addEntityBattleCapacities(EntityDefinition savedEntity, EntityDefinitionDto dto){
 		dto.getBattleCapacities().forEach(c -> c.setEntityId(savedEntity.getId()));
 		battleTypeClientProxy.bulkAddCapacities(dto.getBattleCapacities());
 	}

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("entity-definition")
 public class EntityController {
@@ -51,6 +53,11 @@ public class EntityController {
 	public EntityDefinitionDto save(@RequestBody EntityDefinitionDto dto) {
 		return entityService.save(dto);
 	}
+
+    @PostMapping("add_all")
+    public List<EntityDefinitionDto> saveAll(@RequestBody List<EntityDefinitionDto> dtos) {
+        return entityService.saveAll(dtos);
+    }
 	
 	@PutMapping("{id}/update")
 	public EntityDefinitionDto update(@RequestBody EntityDefinitionDto dto, @PathVariable Long id) {

@@ -6,6 +6,7 @@ def map_creature(raw_creature):
           'name':raw_creature['name'],
           'description':raw_creature['description'],
           'hitpoints':int(raw_creature['health']),
+          'ordinal':int(raw_creature['ordinal']),
           'battleCapacities':[
             {
               'battleTypeId':1,

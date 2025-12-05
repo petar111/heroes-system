@@ -1,4 +1,4 @@
-package com.springpj.heroessimulationservice.model.simulation.battle;
+package com.springpj.heroessimulationservice.model.simulation.battle.simplebattle;
 
 import com.springpj.heroessimulationservice.model.battlecapacity.BattleCapacityDto;
 

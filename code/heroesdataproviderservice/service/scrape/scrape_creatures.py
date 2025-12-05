@@ -41,6 +41,7 @@ def scrape_creatures():
             headers.append(final_headers)
 
     creatures = []
+    counter = 1
     for row in table.find_all("tr")[2:]:
         cols = row.find_all("td")
 
@@ -83,6 +84,8 @@ def scrape_creatures():
         #add links
         creature['selfLink'] = BASE_URL + cols[0].find("a")['href']
         creature['townLink'] = BASE_URL + cols[1].find("a")['href']
+        creature['ordinal'] = counter
+        counter += 1
 
         creatures.append(creature)
 

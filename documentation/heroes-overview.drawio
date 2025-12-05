@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-10-15T13:51:42.328Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.11 Chrome/114.0.5735.289 Electron/25.9.8 Safari/537.36" etag="l6qaHK_cJ74PFDrc00h-" version="22.1.11" type="device">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1861" dy="1774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1869" dy="1795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -97,6 +97,9 @@
         </mxCell>
         <mxCell id="vecTZheeFBqY1uCL2uE2-48" value="*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="65" y="458" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8ABhz-s6U7H9ZKd0QHnr-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vecTZheeFBqY1uCL2uE2-49" target="vecTZheeFBqY1uCL2uE2-56">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="vecTZheeFBqY1uCL2uE2-49" value="Trait" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="130" y="590" width="160" height="88" as="geometry">
@@ -431,7 +434,7 @@
         <mxCell id="rnJYpFdBrfbYmimRZt4O-1" value="&lt;div style=&quot;background-color: rgb(255, 255, 254); line-height: 18px;&quot;&gt;&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&quot;number&quot;:&lt;span style=&quot;color: #098658;&quot;&gt;2&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style=&quot;color: #a31515;&quot;&gt;&quot;experienceLower&quot;&lt;/span&gt;:&lt;span style=&quot;color: #098658;&quot;&gt;1001&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style=&quot;color: #a31515;&quot;&gt;&quot;experienceUpper&quot;&lt;/span&gt;:&lt;span style=&quot;color: #098658;&quot;&gt;2500&lt;/span&gt;&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-285" y="833" width="170" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="DHKu7K5kWY-BNsgwtwqj-0" value="Hero has a spell&lt;br&gt;if it owns a trait with&lt;br&gt;appropriate maturity." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="DHKu7K5kWY-BNsgwtwqj-0" value="Hero has a spell&lt;br&gt;if it owns a trait with&lt;br&gt;appropriate maturity." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-80" y="453" width="130" height="60" as="geometry" />
         </mxCell>
       </root>

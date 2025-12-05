@@ -4,14 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.springpj.heroessimulationservice.client.BattleTypeClientProxy;
 import com.springpj.heroessimulationservice.client.EntityClientProxy;
-import com.springpj.heroessimulationservice.model.battlecapacity.BattleCapacityDto;
 import com.springpj.heroessimulationservice.model.entity.EntityDefinitionDto;
 import com.springpj.heroessimulationservice.model.simulation.battle.BattleSimulationResponseDto;
-import com.springpj.heroessimulationservice.model.simulation.battle.SimpleBattleSimulationRequestDto;
-import com.springpj.heroessimulationservice.model.simulation.battle.SimpleBattleSimulationResponseDto;
+import com.springpj.heroessimulationservice.model.simulation.battle.simplebattle.SimpleBattleSimulationRequestDto;
+import com.springpj.heroessimulationservice.model.simulation.battle.simplebattle.SimpleBattleSimulationResponseDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -24,7 +22,6 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.io.*;
-import java.math.BigInteger;
 import java.util.Objects;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -55,9 +52,9 @@ class SimpleBattleSimulationTest {
 	void testSimulationService(){
 
 		Mono<BattleSimulationResponseDto> response = Mono.just(new BattleSimulationResponseDto());
-		Mockito.when(mockSimulationService.handleSimpleBattle(any())).thenReturn(response);
+		Mockito.when(mockSimulationService.handleOneOnOneBattle(any())).thenReturn(response);
 
-		Assert.isTrue(mockSimulationService.handleSimpleBattle(new SimpleBattleSimulationRequestDto()).equals(response), "Test failed.");
+		Assert.isTrue(mockSimulationService.handleOneOnOneBattle(new SimpleBattleSimulationRequestDto()).equals(response), "Test failed.");
 	}
 
 	@Test
@@ -78,7 +75,7 @@ class SimpleBattleSimulationTest {
 		requestDto.setBattleTypeIdForEntity1(1L);
 		requestDto.setBattleTypeIdForEntity2(1L);
 
-		Mono<BattleSimulationResponseDto> result = simulationService.handleSimpleBattle(requestDto);
+		Mono<BattleSimulationResponseDto> result = simulationService.handleOneOnOneBattle(requestDto);
 
 		FileWriter writer = new FileWriter("battle-log.txt");
 

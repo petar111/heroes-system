@@ -10,9 +10,8 @@ import org.springframework.context.annotation.Profile;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Configuration
@@ -23,15 +22,10 @@ public class ReactiveFeignConfigurationDev {
     public EntityClientProxyImpl getClient(){
         Gson gson = new Gson();
 
-        try (Reader readerKnight = new InputStreamReader(Objects.requireNonNull(ReactiveFeignConfigurationDev.class.getResourceAsStream("/data/creature-knight.json")));
-                Reader readerPeasant = new InputStreamReader(Objects.requireNonNull(ReactiveFeignConfigurationDev.class.getResourceAsStream("/data/creature-peasant.json")))) {
-            EntityDefinitionDto knight = gson.fromJson(readerKnight, EntityDefinitionDto.class);
-            EntityDefinitionDto peasant = gson.fromJson(readerPeasant, EntityDefinitionDto.class);
+        try (Reader reader = new InputStreamReader(Objects.requireNonNull(ReactiveFeignConfigurationDev.class.getResourceAsStream("/data/creatures_mapped.json")))) {
 
-            Map<Long, EntityDefinitionDto> entities = new HashMap<>();
-
-            entities.put(knight.getId(), knight);
-            entities.put(peasant.getId(), peasant);
+            Map<Long, EntityDefinitionDto> entities = Arrays.stream(gson.fromJson(reader, EntityDefinitionDto[].class))
+                    .collect(Collectors.toMap(EntityDefinitionDto::getId, e -> e));
 
             return new EntityClientProxyImpl(entities);
         } catch (IOException e) {
